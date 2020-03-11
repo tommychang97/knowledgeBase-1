@@ -1,0 +1,8 @@
+{
+    "name": "COMP4711",
+    "description": "Express application for artists",
+    "repository": "https://github.com/michaelmhyu1013/michaelmhyu1013.github.io",
+    "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+    "keywords": ["node", "express", "heroku"],
+    "image": "heroku/nodejs"
+}
