@@ -1,5 +1,5 @@
 let pg = require("../util/postgres");
-
+// Reference for tommy.
 const addArtist = artist => {
     return new Promise((resolve, reject) => {
         pg.query(
