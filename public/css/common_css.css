@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
+:root{
+    --base-color: #00A2E8;
+}
+
+body{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#container{
+    margin: 0 auto;
+    width: 1000px;
+}
+
+#h1_kb{
+    float: left;
+    /* background-color: blue; */
+    margin:0;
+    margin-top: 5px;
+    font-size: 50px;
+}
+
+.logo_base_colour{
+    color: var(--base-color);
+}
+
+.btn_format{
+    color: white;
+    background-color: var(--base-color);
+    border-color: var(--base-color);
+    border-style: solid;
+    height: 26px;
+    cursor: pointer;
+}
+
+.login_input_format{
+    width: 175px;
+    height: 20px;
+    padding-left:5px ;
+}

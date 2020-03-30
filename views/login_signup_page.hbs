@@ -1,0 +1,30 @@
+<div id="div_mid">
+    <div id="div_mid_left">
+        {{#if login_css}}
+        <img src="https://i.ibb.co/TLnFXX0/vector-knowledge.jpg" alt="kb_img">
+        {{/if}}
+
+        {{#if signup_css}}
+        <h1 id="h1_signup">
+            Let's us <br>
+            know a <br>
+            little more <br>
+            about you
+        </h1>
+        {{/if}}
+
+    </div>
+
+    <div id="div_mid_right">
+        {{#if login_css}}
+        {{>login_form}}
+        {{/if}}
+
+        {{#if signup_css}}
+        {{>signup_form}}
+        {{/if}}
+
+
+    </div>
+
+</div>
