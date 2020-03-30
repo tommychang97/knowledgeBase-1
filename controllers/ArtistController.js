@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const artistModel = require("../models/artistModel");
+const artistModel = require('../models/artistModel');
 
 const controller = {
     addArtist: (req, res) => {
@@ -12,7 +12,7 @@ const controller = {
         artistModel
             .addArtist(newArtist)
             .then(() => {
-                return res.status(200).redirect("/artists");
+                return res.status(200).redirect('/artists');
             })
             .catch(err => {
                 res.send(err);
@@ -23,20 +23,20 @@ const controller = {
         artistModel
             .deleteArtist(artistID)
             .then(() => {
-                return res.status(200).redirect("/artists");
+                return res.status(200).redirect('/artists');
             })
             .catch(err => {
                 res.send(err);
             });
     },
     getArtists: (req, res) => {
-        let searchValue = req.query.search ? req.query.search : "";
+        let searchValue = req.query.search ? req.query.search : '';
 
         artistModel
             .getArtists(searchValue)
             .then(artists => {
-                return res.status(200).render("artistPage", {
-                    title: "Artist Directory",
+                return res.status(200).render('artistPage', {
+                    title: 'Artist Directory',
                     artists,
                 });
             })
