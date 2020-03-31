@@ -39,7 +39,7 @@
     float: left;
 }
 
-.login_input_format.login_input_long {
+.input_format.login_input_long {
     width: 362px ;
 }
 
@@ -57,14 +57,9 @@ img{
     margin: 0;
 }
 
-
-
 /* Signup ------------------------------------------- */
 #btn_signup_complete{
-    background-color: white;
-    color: var(--base-color);
-    font-weight: bold;
-    width: 362px ;
+    width: 370px ;
 }
 
 #h1_signup{
@@ -73,5 +68,6 @@ img{
 }
 
 #input_about_you{
+    width: 365px ;
     height: 100px;
 }

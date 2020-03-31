@@ -1,21 +1,30 @@
 <header>
     {{!-- Login and Signup page --}}
 
-    {{#if login_signup_page}}
+    {{#if onLoginSignup}}
 
     <div id="div_top">
         <h1 id="h1_kb">knowledge<span class="logo_base_colour">Base</span></h1>
 
-        {{#if login_css}}
+        {{#if onLogin}}
         <div id="div_login">
-            <input type="email" class="login_input_format" placeholder="email">
-            <input type="password" class="login_input_format" placeholder="password">
-            <button class="btn_format" id="btn_login">login</button>
+            <form action="/login" method="POST">
+                <input type="email" class="input_format" placeholder="email">
+                <input type="password" class="input_format" placeholder="password">
+                <button class="btn_format" id="btn_login">login</button>
+            </form>
         </div>
         {{/if}}
 
     </div>
     {{/if}}
 
+    {{#if onHome}}
+    <nav>
+        <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
+        <input id="nav_search" type="text" placeholder="🔍 Search" />
+        <button id="nav_btn_logout" class="btn_format">logout</button>
+    </nav>
+    {{/if}}
 
 </header>

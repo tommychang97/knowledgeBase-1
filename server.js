@@ -1,10 +1,12 @@
 'use strict';
 
-var express = require('express');
 var bodyParser = require('body-parser');
-var path = require('path');
-var app = express();
+var express = require('express');
 var hbs = require('express-handlebars');
+var path = require('path');
+var session = require('express-session');
+var uuid = require('uuid');
+var app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,6 +20,18 @@ let hbsHelpers = hbs.create({
     defaultLayout: 'main-layout',
     extname: '.hbs',
 });
+
+app.use(
+    session({
+        genid: req => {
+            return uuid.v4(); // use UUIDs for session IDs
+        },
+        secret: 'tommy changster',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false },
+    })
+);
 
 app.engine('.hbs', hbsHelpers.engine);
 

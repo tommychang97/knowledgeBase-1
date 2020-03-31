@@ -1,10 +1,10 @@
 <div id="div_mid">
     <div id="div_mid_left">
-        {{#if login_css}}
+        {{#if onLogin}}
         <img src="https://i.ibb.co/TLnFXX0/vector-knowledge.jpg" alt="kb_img">
         {{/if}}
 
-        {{#if signup_css}}
+        {{#if onSignup}}
         <h1 id="h1_signup">
             Let's us <br>
             know a <br>
@@ -16,11 +16,11 @@
     </div>
 
     <div id="div_mid_right">
-        {{#if login_css}}
+        {{#if onLogin}}
         {{>login_form}}
         {{/if}}
 
-        {{#if signup_css}}
+        {{#if onSignup}}
         {{>signup_form}}
         {{/if}}
 

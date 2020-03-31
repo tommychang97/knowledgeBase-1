@@ -11,52 +11,48 @@ const authControls = {
         // fetch hashed password from db using username as query
         // const hashedPassword = db.queryPassword;
         let hashedPassword;
-        bcrypt
-            .compare(password, hashedPassword)
-            .then(match => {
-                if (match) {
+        // bcrypt
+        //     .compare(password, hashedPassword)
+        //     .then(match => {
+        //         if (match) {
                     // passport authenticate
                     // create session
-                    res.render('home');
-                }
+                    res.redirect('home');
+                // }
                 // if fail, notify user somehow that the authenticate failed
-            })
-            .catch(err => {
-                reject(err);
-            });
+            // })
+            // .catch(err => {
+            //     console.log(err);
+            // });
         // passport authenticate
         // if pass, render home
     },
     logout: (req, res) => {
         // destroy session from db
         // redirect to landing page
-        res.render('landing');
+        res.render('/');
     },
     signup: (req, res) => {
-        const {
-            firstname,
-            lastname,
-            email,
-            password,
-            confirm_password,
-        } = req.body;
-        // front-end should do check for matching password
+        req.session.signup = req.body; // pass signup form to register form
+        res.render('login_signup_page', {
+            onLoginSignup: true,
+            onSignup: true,
+        });
+    },
+    register: (req, res) => {
+        let form = { ...req.session.signup, ...req.body };
         // hash password
         bcrypt
-            .hash(password, saltRounds)
+            .hash(form.password, saltRounds)
             .then(hashedPassword => {
-                console.log(hashedPassword);
+                form.password = hashedPassword;
+                console.log(form);
                 // register user into db
-                // db.signup({firstname, lastname, email, hashedPassword, confirm_password})
-                res.render('additionalInfo');
+                //  db.signup(form);
             })
             .catch(err => {
                 reject(err);
             });
-    },
-    register: (req, res) => {
-        const { imageUrl, about, country, birthdate } = req.body;
-        // db.updateUser({imageUrl, about, country, birthdate});
         res.redirect('home');
     },
 };

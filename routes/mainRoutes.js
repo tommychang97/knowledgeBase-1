@@ -10,18 +10,21 @@ const msgController = require('../controllers/MessageController');
 const postController = require('../controllers/PostController');
 const profileController = require('../controllers/ProfileController');
 
-router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname, 'public')));
 
-router.get('', (req, res) => {
-    res.render('login_signup_page', {
-        login_signup_page: true,
-        login_css: true,
-    });
+router.get('/', (req, res) => {
+    console.log(`SessionID: ${req.sessionID}`);
+    res.render('login_signup_page', { onLoginSignup: true, onLogin: true });
 });
 
 /** Authentication  */
+router.post('/signup', authController.signup);
+
+router.get('/home', function(req, res) {
+    res.render('home_page', { onHome: true });
+});
 
 router.post('/login', authController.login);
 
