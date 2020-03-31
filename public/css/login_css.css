@@ -1,0 +1,73 @@
+/* Top  Div -------------------------------------------------------- */
+#div_top{
+    /* background-color: aquamarine; */
+    width: 1000px;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+#div_login{
+    float: right;
+    width: 450px;
+    height: 30px;
+    margin-top: 30px;
+    /* background-color: bisque; */
+}
+
+.input_box{
+    width: 150px;
+}
+
+#btn_login{
+    width: 70px;
+}
+
+/* Mid  Div -------------------------------------------------------- */
+#div_mid{
+    width: 100%;
+    height: 600px;
+}
+
+#btn_register{
+    width: 370px ;
+}
+
+#div_mid_left {
+    width: 500px;
+    height: auto;
+    float: left;
+}
+
+.input_format.login_input_long {
+    width: 362px ;
+}
+
+#div_mid_right{
+    float: right;
+    width: 450px;
+    margin-top: 10px;
+}
+
+img{
+    width: 100%;
+}
+
+#div_signup h1{
+    margin: 0;
+}
+
+/* Signup ------------------------------------------- */
+#btn_signup_complete{
+    width: 370px ;
+}
+
+#h1_signup{
+    font-size: 50px;
+    padding-left: 20px;;
+}
+
+#input_about_you{
+    width: 365px ;
+    height: 100px;
+}
