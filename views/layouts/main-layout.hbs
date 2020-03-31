@@ -4,19 +4,25 @@
 
 <head>
     <meta charset="utf-8" />
-
     <title>{{title}}</title>
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/common_css.css">
+
+    {{#if login_signup_page}}
+    <link rel="stylesheet" href="/css/login_css.css">
+    {{/if}}
 
 </head>
-<header>
-    {{{header}}}
-</header>
+
+
 
 <body>
-    {{{body}}}
+    <header>
+        {{>header}}
+    </header>
+
+    <div id="container">
+        {{{body}}}
+    </div>
 </body>
 <footer>
     {{{footer}}}
