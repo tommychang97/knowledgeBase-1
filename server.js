@@ -23,15 +23,6 @@ app.engine('.hbs', hbsHelpers.engine);
 
 app.set('view engine', '.hbs');
 
-// HBS
-app.get('/', function (req, res){
-    res.render("login_signup_page", {login_signup_page:true, login_css: true});
-});
-
-app.get('/signup', function (req, res){
-    res.render("login_signup_page", {login_signup_page:true, signup_css: true});
-});
-
 app.listen(process.env.PORT || port, () => {
     console.log(`Server listening on port: ${port}`);
 });

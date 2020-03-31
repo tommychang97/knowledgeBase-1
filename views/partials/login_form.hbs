@@ -4,15 +4,16 @@
     sharing
 </h1>
 <br>
-<form action="">
-    <input class="login_input_format" type="text" placeholder="firstname">
-    <input class="login_input_format" type="text" placeholder="lastname">
+<form action="/signup" method="POST">
+    <input name="firstname" class="login_input_format" type="text" placeholder="firstname">
+    <input name="lastname" class="login_input_format" type="text" placeholder="lastname">
     <br><br>
-    <input class="login_input_format login_input_long" type="email" placeholder="email">
+    <input name="email" class="login_input_format login_input_long" type="email" placeholder="email">
     <br><br>
-    <input class="login_input_format login_input_long" type="password" placeholder="password">
+    <input name="password" class="login_input_format login_input_long" type="password" placeholder="password">
     <br><br>
-    <input class="login_input_format login_input_long" type="password" placeholder="confirm password">
+    <input name="confirm_password" class="login_input_format login_input_long" type="password"
+        placeholder="confirm password">
     <br><br>
     <button id="btn_register" class="btn_format">signup</button>
 </form>

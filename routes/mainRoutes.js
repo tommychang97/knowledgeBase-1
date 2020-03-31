@@ -14,14 +14,14 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname, 'public')));
 
-/** Authentication  */
 router.get('', (req, res) => {
-    res.render('landing');
+    res.render('login_signup_page', {
+        login_signup_page: true,
+        login_css: true,
+    });
 });
 
-router.get('/home', (req, res) => {
-    res.send('homepage');
-});
+/** Authentication  */
 
 router.post('/login', authController.login);
 
