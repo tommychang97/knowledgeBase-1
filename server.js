@@ -25,11 +25,15 @@ app.set("view engine", ".hbs");
 
 // HBS
 app.get('/', function (req, res){
-    res.render("login_signup_page", {login_signup_page:true, login_css: true});
+    res.render("login_signup_page", {onLoginSignup:true, onLogin: true});
 });
 
 app.get('/signup', function (req, res){
-    res.render("login_signup_page", {login_signup_page:true, signup_css: true});
+    res.render("login_signup_page", {onLoginSignup:true, onSignup: true});
+});
+
+app.get('/home', function (req, res){
+    res.render("home_page", {onHome:true});
 });
 
 app.listen(process.env.PORT || port, () => {
