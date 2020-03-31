@@ -8,9 +8,11 @@
 
         {{#if onLogin}}
         <div id="div_login">
-            <input type="email" class="input_format" placeholder="email">
-            <input type="password" class="input_format" placeholder="password">
-            <button class="btn_format" id="btn_login">login</button>
+            <form action="/login" method="POST">
+                <input type="email" class="input_format" placeholder="email">
+                <input type="password" class="input_format" placeholder="password">
+                <button class="btn_format" id="btn_login">login</button>
+            </form>
         </div>
         {{/if}}
 
@@ -22,7 +24,7 @@
         <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
         <input id="nav_search" type="text" placeholder="🔍 Search" />
         <button id="nav_btn_logout" class="btn_format">logout</button>
-      </nav>
+    </nav>
     {{/if}}
 
 </header>
