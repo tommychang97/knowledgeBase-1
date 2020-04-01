@@ -2,30 +2,44 @@
 
 const bcrypt = require('bcrypt');
 const passport = require('../util/passport');
+const db = require('../util/postgres');
+const userModel = require('../models/userModel');
 
 const saltRounds = 10;
 
 const authControls = {
     login: (req, res) => {
-        const { username, password } = req.body;
-        // fetch hashed password from db using username as query
-        // const hashedPassword = db.queryPassword;
-        let hashedPassword;
-        // bcrypt
-        //     .compare(password, hashedPassword)
-        //     .then(match => {
-        //         if (match) {
-                    // passport authenticate
-                    // create session
-                    res.redirect('home');
-                // }
-                // if fail, notify user somehow that the authenticate failed
-            // })
-            // .catch(err => {
-            //     console.log(err);
-            // });
-        // passport authenticate
-        // if pass, render home
+        const {email, password} = req.body;
+        const userResults = userModel.getUser(email);
+        userResults.then((data) => {
+            if (data === undefined || data.length == 0) {
+                console.log("No such person found!");
+                // if fail, notify user somehow that the combination of email/pw is invalid 
+            }
+            else {
+                console.log(data);
+                const hashedPassword = data[0].password;
+                // fetch hashed password from db using username as query
+                // const hashedPassword = db.queryPassword;
+                // bcrypt
+                //     .compare(password, hashedPassword)
+                //     .then(match => {
+                //         if (match) {
+                            // passport authenticate
+                            // create session          
+                            res.redirect('home');
+                        // }
+                        // if fail, notify user somehow that the authenticate failed
+                    // })
+                    // .catch(err => {
+                    //     console.log(err);
+                    // });
+                // passport authenticate
+                // if pass, render home
+            }
+        }).catch(function(error) {
+            console.log(error);
+        }) 
     },
     logout: (req, res) => {
         // destroy session from db
@@ -48,10 +62,10 @@ const authControls = {
                 form.password = hashedPassword;
                 console.log(form);
                 // register user into db
-                //  db.signup(form);
+                userModel.signUp(form)
             })
             .catch(err => {
-                reject(err);
+                console.log(err);
             });
         res.redirect('home');
     },
