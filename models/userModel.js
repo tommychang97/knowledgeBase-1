@@ -34,7 +34,7 @@ const signUp = registerInfo => {
 const deleteUserSession = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `DELETE FROM "Sessions" WHERE ID = '${user.ID}'`
+            `DELETE FROM "Sessions" WHERE "ID" = '${user.id}'`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -49,7 +49,7 @@ const deleteUserSession = user => {
 const createUserSession = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `INSERT INTO "Sessions" (userID, sessionID) VALUES ('${user.userID}', '${user.sessionID}');`
+            `INSERT INTO "Sessions" (id, sessionID) VALUES ('${user.id}', '${user.sessionid}');`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -61,13 +61,27 @@ const createUserSession = user => {
     });
 };
 
-const getProfile = user => {
+const editProfile = user => {
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `UPDATE "users" SET firstname = '${user.firstname}', lastname = '${user.lastname}, imageurl = '${user.imageurl}', country = '${user.country}'
+            , dob = '${user.country}', description = '${user.description}' 
+             WHERE "ID" = '${user.id}'`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res);
+        }).catch(function(error) {
+            console.log(error);
+        });
+    });
 }
 
 const incrementLike = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `UPDATE "users" SET likes = likes + 1 WHERE ID = '${user.ID}`
+            `UPDATE "users" SET likes = likes + 1 WHERE "ID" = '${user.id}`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -81,7 +95,7 @@ const incrementLike = user => {
 const incrementPosts = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `UPDATE "users" SET posts = posts + 1 WHERE ID = '${user.ID}`
+            `UPDATE "users" SET posts = posts + 1 WHERE "ID" = '${user.id}`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -97,7 +111,7 @@ const incrementPosts = user => {
 const incrementMessages = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `UPDATE "users" SET messages = messages + 1 WHERE ID = '${user.ID}`
+            `UPDATE "users" SET messages = messages + 1 WHERE "ID" = '${user.id}`
         ).then((res, err) => {
             if (err) {
                 reject(err);
