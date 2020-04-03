@@ -15,7 +15,6 @@ router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname, 'public')));
 
 router.get('/', (req, res) => {
-    console.log(`SessionID: ${req.sessionID}`);
     res.render('login_signup_page', { onLoginSignup: true, onLogin: true });
 });
 
@@ -23,6 +22,7 @@ router.get('/', (req, res) => {
 router.post('/signup', authController.signup);
 
 router.get('/home', function(req, res) {
+    // console.log(`SessionID: ${req.session.Auth.sessionID}`);
     res.render('home_page', { onHome: true });
 });
 
@@ -45,10 +45,11 @@ router.post('/home/user/:userId/like', profileController.sendLike);
 router.post('/home/user/:userId/message', profileController.sendMessage);
 
 /** Posts == Discussion */
+router.post('/post', postController.createPost);
 
-router.get('/home/posts/search', postController.search);
+router.get('/home/search', postController.search);
 
-router.get('/home/user/:userId/posts/:postId', postController.get);
+router.get('/home/posts/:postId?/:search?', postController.get);
 
 router.post(
     '/home/user/:userId/posts/:postId/comment',
@@ -57,9 +58,7 @@ router.post(
 
 /** Messages  */
 
-router.get('/home/user/:id/messages/:msgId', msgController.get);
-
-router.get('/home/user/:id/messages', msgController.getMessages);
+router.get('/home/messages/:msgId?', msgController.get);
 
 router.post('/home/user/:id/messages/:msgId/send', msgController.sendMessage);
 

@@ -22,11 +22,13 @@
     {{#if onHome}}
     <nav>
         <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
-        <form id="header_search" action="/home/posts/search">
-        <button type="submit" id="search_button"></button>
-        <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
+        <form id="header_search" action="/home/search" method="GET">
+            <button type="submit" id="search_button"></button>
+            <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
         </form>
-        <button id="nav_btn_logout" class="btn_format">logout</button>
+        <form action="/logout" method="POST">
+            <button id="nav_btn_logout" class="btn_format">logout</button>
+        </form>
     </nav>
     {{/if}}
 
@@ -34,10 +36,12 @@
     <nav>
         <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
         <form id="header_search" action="/home/posts/search">
-        <button type="submit" id="search_button"></button>
-        <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
+            <button type="submit" id="search_button"></button>
+            <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
         </form>
-        <button id="nav_btn_logout" class="btn_format">logout</button>
+        <form action="/logout" method="POST">
+            <button id="nav_btn_logout" class="btn_format">logout</button>
+        </form>
     </nav>
     {{/if}}
 
@@ -45,10 +49,12 @@
     <nav>
         <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
         <form id="header_search" action="/home/posts/search">
-        <button type="submit" id="search_button"></button>
-        <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
+            <button type="submit" id="search_button"></button>
+            <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
         </form>
-        <button id="nav_btn_logout" class="btn_format">logout</button>
+        <form action="/logout" method="POST">
+            <button id="nav_btn_logout" class="btn_format">logout</button>
+        </form>
     </nav>
     {{/if}}
 

@@ -1,7 +1,9 @@
 'use strict';
 
 const msgControls = {
-    get: (req, res) => {},
+    get: (req, res) => {
+        res.render('messagesView');
+    },
     getMessages: (req, res) => {
         // const results = ...
         const results = { onMessages: true };

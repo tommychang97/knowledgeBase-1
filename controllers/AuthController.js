@@ -15,22 +15,26 @@ const authControls = {
         //     .compare(password, hashedPassword)
         //     .then(match => {
         //         if (match) {
-                    // passport authenticate
-                    // create session
-                    res.redirect('home');
-                // }
-                // if fail, notify user somehow that the authenticate failed
-            // })
-            // .catch(err => {
-            //     console.log(err);
-            // });
+        // passport authenticate
+        // fetch userID
+        const userID = "";
+        // create session
+        req.session.Auth = { userID, sessionID: req.sessionID };
+        res.redirect('home');
+        // }
+        // if fail, notify user somehow that the authenticate failed
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // });
         // passport authenticate
         // if pass, render home
     },
     logout: (req, res) => {
+        req.session.Auth.userID;
         // destroy session from db
         // redirect to landing page
-        res.render('/');
+        res.redirect('/');
     },
     signup: (req, res) => {
         req.session.signup = req.body; // pass signup form to register form
