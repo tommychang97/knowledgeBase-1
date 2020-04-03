@@ -218,6 +218,10 @@
     margin-left: 35px;
     width: 85%;
     height: 100px;
+    font-family: inherit;
+    font-size: inherit;
+    resize: none;
+    padding: 10px;
 }
 
 .comment_button{
