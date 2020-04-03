@@ -1,6 +1,6 @@
 let pg = require("../util/postgres");
 
-const getMessage = conversation => {
+const getMessages = conversation => {
     return new Promise((resolve, reject) => {
         pg.query(
             `SELECT * FROM "message" WHERE conversationid = '${conversation.id}'  ORDER BY date, conversationid ASC;`

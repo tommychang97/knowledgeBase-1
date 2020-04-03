@@ -22,7 +22,7 @@ const addPost = post => {
           if (err) {
               reject(err);
           }
-          resolve(res.rows);
+          resolve(res;
       });
   });
 };
