@@ -1,0 +1,33 @@
+<div id="div_top">
+    <div id="div_top_left">
+        {{#if onProfile}}
+
+        {{>user_profile_summary}}
+
+        {{/if}}
+    </div>
+    <div id="div_top_right">
+        {{#if onProfile}}
+
+        <button class="message_button">Message</button>
+        <p>
+            <span class="user_profile_link_size">{{likes.size}}</span>
+            <a class="user_profile_links" href="">Likes</a>
+            <button class="like_button">+</button>
+        </p>
+        <p>
+            <span class="user_profile_link_size">{{posts.size}}</span>
+            <a class="user_profile_links" href="">Posts</a>
+        </p>
+        
+        {{/if}}
+    </div>
+</div>
+
+<div id="div_bottom">
+    {{#if onProfile}}
+
+        {{>user_profile_posts}}
+    
+    {{/if}}
+</div>
