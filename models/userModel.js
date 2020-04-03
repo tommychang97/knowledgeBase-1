@@ -61,9 +61,61 @@ const createUserSession = user => {
     });
 };
 
+const getProfile = user => {
+}
+
+const incrementLike = user => {
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `UPDATE "users" SET likes = likes + 1 WHERE ID = '${user.ID}`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res);
+        }).catch(function(error) {
+            console.log(error);
+        });
+    });
+}
+const incrementPosts = user => {
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `UPDATE "users" SET posts = posts + 1 WHERE ID = '${user.ID}`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res);
+        }).catch(function(error) {
+            console.log(error);
+        });
+    });
+}
+
+
+const incrementMessages = user => {
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `UPDATE "users" SET messages = messages + 1 WHERE ID = '${user.ID}`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res);
+        }).catch(function(error) {
+            console.log(error);
+        });
+    });
+}
+
 module.exports = {
     getUser: getUser,
     deleteUserSession: deleteUserSession,
     createUserSession: createUserSession,
-    signUp: signUp
+    signUp: signUp,
+    getProfile: getProfile,
+    incrementLike: incrementLike,
+    intcrementPosts: incrementPosts,
+    incrementMessages: incrementMessages
 };
