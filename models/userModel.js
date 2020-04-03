@@ -128,7 +128,7 @@ module.exports = {
     deleteUserSession: deleteUserSession,
     createUserSession: createUserSession,
     signUp: signUp,
-    getProfile: getProfile,
+    editProfile: editProfile,
     incrementLike: incrementLike,
     intcrementPosts: incrementPosts,
     incrementMessages: incrementMessages
