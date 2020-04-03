@@ -14,7 +14,7 @@ const postControls = {
         const topic = req.params.topic;
         // query db for posts with name containing value or topic == topic
         // const results = db.findPosts(searchValue, topic);
-        const results = {};
+        const results = { onHome: true };
         res.render('searchView', results);
     },
     sendComment: (req, res) => {},

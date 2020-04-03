@@ -5,7 +5,7 @@ const profileControls = {
         // get profileId from req query params
         const profileId = req.params.userId;
         // const userProfile = db.getProfile(profileId);
-        const userProfile = {};
+        const userProfile = { onProfile: true };
         res.render('profileView', userProfile);
     },
     edit: (req, res) => {

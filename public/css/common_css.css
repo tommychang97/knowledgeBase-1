@@ -87,7 +87,19 @@ a{
     height: 30px;
     background-color: #E1EBED;
     vertical-align: top;
-    margin-top: 10px;
-    margin-left: 20px ;
-    padding-left: 5px;
+    color: gray;
+}
+
+#header_search {
+    display: inline-flex;
+}
+
+#search_button {
+    width: 32px;
+    height: 32px;
+    background:url(../assets/searchicon32.png);
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
 }

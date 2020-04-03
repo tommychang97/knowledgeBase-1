@@ -22,7 +22,32 @@
     {{#if onHome}}
     <nav>
         <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
-        <input id="nav_search" type="text" placeholder="🔍 Search" />
+        <form id="header_search" action="/home/posts/search">
+        <button type="submit" id="search_button"></button>
+        <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
+        </form>
+        <button id="nav_btn_logout" class="btn_format">logout</button>
+    </nav>
+    {{/if}}
+
+    {{#if onProfile}}
+    <nav>
+        <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
+        <form id="header_search" action="/home/posts/search">
+        <button type="submit" id="search_button"></button>
+        <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
+        </form>
+        <button id="nav_btn_logout" class="btn_format">logout</button>
+    </nav>
+    {{/if}}
+
+    {{#if onMessages}}
+    <nav>
+        <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
+        <form id="header_search" action="/home/posts/search">
+        <button type="submit" id="search_button"></button>
+        <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
+        </form>
         <button id="nav_btn_logout" class="btn_format">logout</button>
     </nav>
     {{/if}}

@@ -3,125 +3,109 @@
 #div_left{
     float: left;
     height: 500px;
-    width: 300px;
-    padding: 15px;
+    width: 20%;
     margin-top: 50px;
 }
 
-#div_profile_sum{
+#div_user_profile_sum{
     width: 100%;
-    height: 270px;
-    text-align: center;
+    float: left;
+}
+
+#div_top_left{
+    width: 70%;
 }
 
 /* ----------------------------------------------- */
 #img_profile{
-    width: 150px;
+    width: 180px;
     height: auto;
-    margin: 0 auto;
     margin-bottom: 15px;
     border-radius: 30px;
 }
 
 #img_profile img{
+    width: 100%;
     border-radius: 50%;
+    padding:2px;
+    border:1px solid #e6e8eca2;
 }
 
-#div_profile_sum h2, p{
+#div_user_profile_sum h3, p{
     margin: 5px;
 }
 
-#div_profile_sum p{
+#div_user_profile_sum p{
     color: var(--text-color);
 }
 
-/* ----------------------------------------------- */
-#div_links{
-    width: 200px;
-    height: 230px;
-    margin: 0 auto;
-}
-
-.profile_links{
-    color: black;
-}
-
-.profile_link_size{
-    float: right;
+.country{
+    font-size: 9pt;
 }
 
 /* Right side of page -----------------------------------------------------------------*/
-#div_right{
+
+#div_top_right{
+    width: 30%;
+    margin-top: 110px;
     float: right;
-    height: 800px;
-    width: 640px;
-    padding: 15px;
 }
 
-/* ----------------------------------------------- */
-
-#div_make_post{
-    width: 600px;
-    height: 320px;
-    padding-left: 30px;
-}
-
-#div_make_post h1{
-    color: var(--text-color);
-    margin-bottom: 15px;
-}
-
-#div_make_post input, textarea{
-    width: 500px;
-    margin-bottom: 10px;
-}
-
-.select_drop{
-    height: 30px;
-    background-color: white;
-    border: solid 2px var(--base-color);
-    color: var(--base-color);
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#post_select{
-    width: 200px;
-}
-
-#btn_post{
-    border: solid 2px var(--base-color);
-    color: var(--base-color);
-    height: 30px;
-    width: 150px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-left: 150px;
-
-}
-
-/* ----------------------------------------------- */
-
-#div_search_topic{
-    width: 100%;
-    height: 70px;
-    padding-top: 10px;
-}
-
-#div_search_topic h3{
-    color: var(--text-color);
-    float: left;
-    padding:5px;
-    margin-right: 15px;
-}
-
-#topic_select{
-    width: 200px;
-}
-
-#btn_topic_search{
+#img_send_message{
     width: 80px;
-    height: 30px;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 30px;
+}
+
+#img_send_message img{
+    border-radius: 50%;
+    padding:2px;
+    border:1px solid #e6e8eca2;
+}
+
+#div_right{
+    height: 500px;
+    width: 70%;
+    padding: 15px;
+    margin-top: 50px;
+}
+
+.message_button{
+    margin-bottom: 10px;
+    color: white;
+    background-color: rgb(25, 111, 192);
+    border: none;
+    padding: 5px;
+    border-radius: 8%;
+    cursor: pointer;
+}
+
+.send_message_button{
+    color: white;
+    background-color: var(--base-color);
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.like_button{
+    color: white;
+    background-color: var(--base-color);
+    border: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.input_format{
+    margin-bottom: 20px;
+}
+
+#message_detail{
+    width: 400px;
 }
 
 /* ----------------------------------------------- */
@@ -136,7 +120,7 @@
 }
 
 .div_post{
-    width: 100%;
+    width: 80%;
     height: 150px;
     margin-top: 10px;
 }
@@ -196,20 +180,7 @@
     margin-right: 15px;
 }
 
-#post_detail{
-    font-family: inherit;
-    font-size: inherit;
-    padding: 10px;
-    height: 150px;
-    width: 487px;
-    resize: none;
-}
-
 /* ----------------------------------------------- */
-
-#searchView {
-    width:50%;
-}
 
 .post_replies{
     width: 90%;
@@ -219,9 +190,10 @@
     width: 90%;
 }
 
+
 .div_reply{
-    width: 100%;
-    height: 120px;
+    width: 90%;
+    height: 150px;
     margin-left: 20px;
 }
 
@@ -244,7 +216,7 @@
 
 .reply_box{
     margin-left: 35px;
-    width: 82%;
+    width: 85%;
     height: 100px;
     font-family: inherit;
     font-size: inherit;
@@ -256,7 +228,15 @@
     float: right;
     color: white;
     background-color: #00A2E8;
-    margin-right: 8%;
+    margin-right: 10%;
     border: none;
-    cursor: pointer;
+}
+
+#div_top{
+    width: 100%;
+    height: 350px;
+}
+
+#div_bottom{
+    width: 100%;
 }
