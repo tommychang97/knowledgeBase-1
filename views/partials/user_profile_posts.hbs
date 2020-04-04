@@ -1,5 +1,51 @@
 <div id="div_user_posts">
-    <h2>All posts by user</h2>
-    {{>post}}
-
+  <h2>All posts by user</h2>
+  {{#each posts}}
+  {{>post}}
+  {{/each}}
 </div>
+
+{{!-- 
+[
+  {
+    threadid: 6,
+    userid: 19,
+    title: 'testdoc19',
+    body: 'test',
+    date: 2020-04-03T07:00:00.000Z,
+    subject: 'java',
+    replycount: 0,
+    password: '$2b$10$z3ADAdYXMb4ndRRkeAcPOe7M1wIxXmJ/xw.WlkA1o2hYhilEQp/t2',
+    imageurl: 'https://i.ibb.co/TLnFXX0/vector-knowledge.jpg',
+    country: 'test',
+    description: 'test',
+    dob: 1994-10-12T07:00:00.000Z,
+    messages: 0,
+    posts: 6,
+    likes: 0,
+    email: 'gyurt342@hotmail.com',
+    firstname: 'MICHAEL',
+    lastname: 'YU'
+  },
+  {
+    threadid: 5,
+    userid: 19,
+    title: 'post 2',
+    body: 'wefwefwef',
+    date: 2020-04-03T07:00:00.000Z,
+    subject: 'php',
+    replycount: 0,
+    password: '$2b$10$z3ADAdYXMb4ndRRkeAcPOe7M1wIxXmJ/xw.WlkA1o2hYhilEQp/t2',
+    imageurl: 'https://i.ibb.co/TLnFXX0/vector-knowledge.jpg',
+    country: 'test',
+    description: 'test',
+    dob: 1994-10-12T07:00:00.000Z,
+    messages: 0,
+    posts: 6,
+    likes: 0,
+    email: 'gyurt342@hotmail.com',
+    firstname: 'MICHAEL',
+    lastname: 'YU'
+  },
+] 
+--}}

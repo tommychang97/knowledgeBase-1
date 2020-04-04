@@ -21,7 +21,7 @@
 
     {{#if onHome}}
     <nav>
-        <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
+        <a id="nav_logo" href="/home">k<span class="logo_base_colour">b</span></a>
         <form id="header_search" action="/home/search" method="GET">
             <button type="submit" id="search_button"></button>
             <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
@@ -34,8 +34,8 @@
 
     {{#if onProfile}}
     <nav>
-        <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
-        <form id="header_search" action="/home/threads/search">
+        <a id="nav_logo" href="/home">k<span class="logo_base_colour">b</span></a>
+        <form id="header_search" action="/home/search">
             <button type="submit" id="search_button"></button>
             <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
         </form>
@@ -47,8 +47,8 @@
 
     {{#if onMessages}}
     <nav>
-        <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
-        <form id="header_search" action="/home/threads/search">
+        <a id="nav_logo" href="/home">k<span class="logo_base_colour">b</span></a>
+        <form id="header_search" action="/home/search">
             <button type="submit" id="search_button"></button>
             <input id="nav_search" type="text" name="searchValue" placeholder="Search" />
         </form>

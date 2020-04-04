@@ -9,7 +9,8 @@ const msgControls = {
         const results = { onMessages: true };
         res.render('messagesView', { onHome: 'true' });
     },
-    sendMessage: (req, res) => {},
+    sendMessage: (req, res) => {
+    },
 };
 
 module.exports = msgControls;

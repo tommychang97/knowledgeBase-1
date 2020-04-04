@@ -1,36 +1,44 @@
 'use strict';
 
 const threadModel = require('../models/threadModel');
+const userModel = require('../models/userModel');
 
 const threadControls = {
     createThread: (req, res) => {
         const form = {
             userid: req.session.Auth.id,
             ...req.body,
-            date: '2020-04-20',
         };
         console.log(form);
-        threadModel.addThread(form).then(result => {
+        threadModel.addThread(form).then((result) => {
+            console.log('Added thread', result);
             res.redirect('/home');
         });
     },
     get: (req, res) => {
-        console.log('get threads');
-        if (req.params.postId) {
-            const postID = req.params.postId; //ids start at 1
-            console.log('Fetching specific thread: ', postID);
-        }
-        res.render('messagesView');
-        //db.getMessages
+        threadModel
+            .getThreadsFromUser({ id: req.params.userId, page: 0 })
+            .then((response) => {
+                console.log(response);
+                res.render('messagesView', response);
+            });
     },
     search: (req, res) => {
-        const searchValue = req.query.searchValue;
-        console.log('searchValue', searchValue);
-        const topic = req.params.topic;
-        // query db for posts with name containing value or topic == topic
-        // const results = db.findPosts(searchValue, topic);
-        const results = { onHome: true };
-        res.render('searchView', results);
+        if (req.query.searchValue) {
+            threadModel
+                .getThreadsByTitle({ title: req.query.searchValue, page: 0 })
+                .then((response) => {
+                    const results = { onHome: true, response };
+                    res.render('searchView', results);
+                });
+        } else if (req.query.subject) {
+            threadModel
+                .getThreadsBySubject({ subject: req.query.subject, page: 0 })
+                .then((response) => {
+                    const results = { onHome: true, response };
+                    res.render('searchView', results);
+                });
+        }
     },
     sendComment: (req, res) => {},
 };

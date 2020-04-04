@@ -4,7 +4,7 @@ const getThreads = page => {
   return new Promise((resolve, reject) => {
       var offset = page * 10;
       pg.query(
-          `SELECT * FROM "thread" ORDER BY "ID" OFFSET '${offset}' ROWS FETCH NEXT 10 ROWS ONLY`
+          `SELECT * FROM threads ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY`
       ).then((res, err) => {
           if (err) {
               reject(err);
@@ -17,7 +17,7 @@ const getThreads = page => {
 const addThread = thread => {
   return new Promise((resolve, reject) => {
       pg.query(
-        `INSERT INTO "thread" (userid,title,body,date,subject) VALUES ('${thread.userid}', '${thread.title}','${thread.body}','${thread.date}', '${thread.subject}')`
+        `INSERT INTO threads (userid,title,body,date,subject) VALUES ('${thread.userid}', '${thread.title}','${thread.body}','now()', '${thread.subject}')`
       ).then((res, err) => {
           if (err) {
               reject(err);
@@ -27,11 +27,11 @@ const addThread = thread => {
   });
 };
 
-const getSearchedThreads = searchResult => {
+const getThreadsBySubject = searchResult => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM "thread"  WHERE topic = '${searchResult.topic}' ORDER BY "ID" OFFSET '${offset}' ROWS FETCH NEXT 10 ROWS ONLY;`
+            `SELECT * FROM threads WHERE subject = '${searchResult.subject}' ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -41,8 +41,38 @@ const getSearchedThreads = searchResult => {
     });
 };
 
-module.exports = {
-  getThreads: getThreads,
-  addThread: addThread,
-  getSearchedThreads:getSearchedThreads
+const getThreadsByTitle = searchResult => {
+    var offset = searchResult.page * 10;
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE subject like '%${searchResult.title}%' ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res.rows);
+        });
+    });
 };
+
+const getThreadsFromUser = user => {
+    var offset = user.page * 10;
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE users.userid = ${user.id} ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res.rows);
+        });
+    });
+}
+
+module.exports = {
+    getThreads: getThreads,
+    addThread: addThread,
+    getThreadsBySubject:getThreadsBySubject,
+    getThreadsByTitle:getThreadsByTitle,
+    getThreadsFromUser:getThreadsFromUser,
+  };

@@ -3,7 +3,7 @@ let pg = require("../util/postgres");
 const getMessages = conversation => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM "message" WHERE conversationid = '${conversation.id}'  ORDER BY date, conversationid ASC;`
+            `SELECT * FROM messages WHERE conversationid = '${conversation.id}' ORDER BY date, conversationid ASC;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -16,7 +16,7 @@ const getMessages = conversation => {
 const createMessage = message => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `INSERT INTO "message" (conversationid, subject1id, subject2id, body, date) VALUES ('${message.conversationid}', '${message.subject1id}', '${message.subject2id}', '${message.body}', '${message.date}')`
+            `INSERT INTO messages (conversationid, subject1id, subject2id, body, date) VALUES ('${message.conversationid}', '${message.subject1id}', '${message.subject2id}', '${message.body}', 'now()')`
         ).then((res, err) => {
             if (err) {
                 reject(err);
