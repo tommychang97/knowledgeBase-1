@@ -4,7 +4,7 @@ const getThreads = page => {
   return new Promise((resolve, reject) => {
       var offset = page * 10;
       pg.query(
-          `SELECT * FROM "thread" ORDER BY threadid DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY`
+          `SELECT * FROM threads ORDER BY threadid DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY`
       ).then((res, err) => {
           if (err) {
               reject(err);
@@ -17,7 +17,7 @@ const getThreads = page => {
 const addThread = thread => {
   return new Promise((resolve, reject) => {
       pg.query(
-        `INSERT INTO "thread" (userid,title,body,date,subject) VALUES ('${thread.userid}', '${thread.title}','${thread.body}','${thread.date}', '${thread.subject}')`
+        `INSERT INTO threads (userid,title,body,date,subject) VALUES ('${thread.userid}', '${thread.title}','${thread.body}','now()', '${thread.subject}')`
       ).then((res, err) => {
           if (err) {
               reject(err);
@@ -31,7 +31,7 @@ const getSearchedThreads = searchResult => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM "thread"  WHERE topic = '${searchResult.topic}' ORDER BY id DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads WHERE topic = '${searchResult.topic}' ORDER BY id DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -45,7 +45,7 @@ const getThreadsFromUser = user => {
     var offset = user.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM "thread"  WHERE userid = '${user.id} ORDER BY threadid DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads WHERE userid = '${user.id} ORDER BY threadid DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);

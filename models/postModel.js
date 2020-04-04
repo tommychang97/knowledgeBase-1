@@ -4,7 +4,7 @@ const getPosts = thread => {
   return new Promise((resolve, reject) => {
       var offset = thread.page * 10;
       pg.query(
-          `SELECT * FROM "thread" INNER JOIN "post" ON thread.threadid = post.threadid WHERE thread.threadid = '${thread.id}'ORDER BY "ID" OFFSET '${offset}' ROWS FETCH NEXT 10 ROWS ONLY;`
+          `SELECT * FROM threads INNER JOIN posts ON threads.threadid = posts.threadid WHERE threads.threadid = '${thread.id}'ORDER BY threads.threadid OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
       ).then((res, err) => {
           if (err) {
               reject(err);
@@ -17,7 +17,7 @@ const getPosts = thread => {
 const addPost = post => {
   return new Promise((resolve, reject) => {
       pg.query(
-          `INSERT INTO "post" (threadid,title,body,date,subject) VALUES ('${post.threadid}', '${post.title}','${post.body}','${post.date}', '${post.subject}')`
+          `INSERT INTO posts (threadid,title,body,date,subject) VALUES ('${post.threadid}', '${post.title}','${post.body}','now()', '${post.subject}')`
       ).then((res, err) => {
           if (err) {
               reject(err);
