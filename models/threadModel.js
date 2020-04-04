@@ -27,11 +27,25 @@ const addThread = thread => {
   });
 };
 
-const getSearchedThreads = searchResult => {
+const getThreadsBySubject = searchResult => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM threads WHERE topic = '${searchResult.topic}' ORDER BY id DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads WHERE subject = '${searchResult.subject}' ORDER BY id DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res.rows);
+        });
+    });
+};
+
+const getThreadsByTitle = searchResult => {
+    var offset = searchResult.page * 10;
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `SELECT * FROM threads WHERE subject like '%${searchResult.title}%' ORDER BY id DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -58,6 +72,7 @@ const getThreadsFromUser = user => {
 module.exports = {
   getThreads: getThreads,
   addThread: addThread,
-  getSearchedThreads:getSearchedThreads,
-  getThreadsFromUser:getThreadsFromUser
+  getThreadsBySubject:getThreadsBySubject,
+  getThreadsByTitle:getThreadsByTitle,
+  getThreadsFromUser:getThreadsFromUser,
 };
