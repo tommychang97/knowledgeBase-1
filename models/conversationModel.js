@@ -3,7 +3,7 @@ let pg = require("../util/postgres");
 const getConversations = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM conversions WHERE subject1id = '${user.id} OR subject2id = '${user.id}';`
+            `SELECT * FROM conversations WHERE subject1id = '${user.id} OR subject2id = '${user.id}';`
         ).then((res, err) => {
             if (err) {
                 reject(err);
