@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE Users (
     "password" varchar(128) NOT NULL,
     imageurl varchar(128),
     country varchar(50),
@@ -8,21 +8,14 @@ CREATE TABLE users (
     posts integer DEFAULT 0,
     likes integer DEFAULT 0,
     email varchar(128) NOT NULL,
-    userid serial NOT NULL,
+    "ID" serial NOT NULL,
     firstname varchar(128) NOT NULL,
     lastname varchar(128) NOT NULL,
-    CONSTRAINT user_pk PRIMARY KEY (userid)
+    CONSTRAINT user_pk PRIMARY KEY ("ID")
 );
 
 
-CREATE TABLE sessions (
-   userid integer NOT NULL,
-   sessionid integer NOT NULL,
-   CONSTRAINT session_pk PRIMARY KEY (sessionid),
-   CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES users (userid)
-);
-
-CREATE TABLE threads (
+CREATE TABLE Thread (
     threadid serial NOT NULL,
     userid integer NOT NULL,
     title varchar(50) NOT NULL,
@@ -30,10 +23,10 @@ CREATE TABLE threads (
     date date NOT NULL,
     subject varchar(50) NOT NULL,
     CONSTRAINT thread_pk PRIMARY KEY (threadid),
-	CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES users(userid)
+	CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES "Users"("ID")
 );
     
-CREATE TABLE posts (
+CREATE TABLE post (
     postid serial NOT NULL,
     threadid integer NOT NULL,
     title varchar(50) NOT NULL,
@@ -44,7 +37,7 @@ CREATE TABLE posts (
 	CONSTRAINT threadid_fk FOREIGN KEY (threadid) REFERENCES thread(threadid)
 );
 
-CREATE TABLE conversations (
+CREATE TABLE conversation (
     conversationid serial NOT NULL,
     subject1id integer NOT NULL,
     subject2id integer NOT NULL,
@@ -63,3 +56,6 @@ CREATE TABLE messages (
     CONSTRAINT message_pk PRIMARY KEY (messageid, conversationid),
 	CONSTRAINT convoid_fk FOREIGN KEY (conversationid,subject1id,subject2id) REFERENCES conversation(conversationid,subject1id,subject2id)
 );
+
+SELECT * FROM "Users" ORDER BY "ID" OFFSET 1 ROWS FETCH NEXT 2 ROWS ONLY;
+    
