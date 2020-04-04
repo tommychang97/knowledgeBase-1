@@ -18,7 +18,7 @@ const authControls = {
             }
             else {
                 console.log(data);
-                const hashedPassword = data[0].password;
+                const hashedPassword = "123";
                 // fetch hashed password from db using username as query
                 // const hashedPassword = db.queryPassword;
                 // bcrypt

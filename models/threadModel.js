@@ -58,7 +58,7 @@ const getThreadsFromUser = user => {
     var offset = user.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE userid = ${user.id} ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE threads.userid = ${user.id} ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);

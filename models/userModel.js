@@ -14,6 +14,34 @@ const getUser = email => {
     });
 };
 
+const getUserPage = userid => {
+    const data = {};
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `SELECT * FROM users WHERE userid = ${userid}`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            data["userInfo"] = res.rows[0];
+            pg.query(
+                `SELECT threads.title, threads.body, threads.date, threads.subject, threads.replycount, users.imageurl FROM users INNER JOIN threads ON users.userid = threads.userid WHERE threads.userid = ${userid}`
+            ).then((res, err) => {
+                if (err) {
+                    reject(err);
+                }
+                data["userThreads"] = res.rows;
+                resolve(data);
+            }).catch(function(error) {
+                console.log(error);
+            });
+        }).catch(function(error) {
+            console.log(error);
+        });
+    });
+};
+
+
 const signUp = registerInfo => {
     return new Promise((resolve, reject) => {
         pg.query(
@@ -124,6 +152,7 @@ const incrementMessages = user => {
 }
 
 module.exports = {
+    getUserPage: getUserPage,
     getUser: getUser,
     deleteUserSession: deleteUserSession,
     createUserSession: createUserSession,
