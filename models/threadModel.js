@@ -4,7 +4,7 @@ const getThreads = page => {
   return new Promise((resolve, reject) => {
       var offset = page * 10;
       pg.query(
-          `SELECT * FROM "thread" ORDER BY "ID" OFFSET '${offset}' ROWS FETCH NEXT 10 ROWS ONLY`
+          `SELECT * FROM "thread" ORDER BY threadid DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY`
       ).then((res, err) => {
           if (err) {
               reject(err);
@@ -31,7 +31,7 @@ const getSearchedThreads = searchResult => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM "thread"  WHERE topic = '${searchResult.topic}' ORDER BY "ID" OFFSET '${offset}' ROWS FETCH NEXT 10 ROWS ONLY;`
+            `SELECT * FROM "thread"  WHERE topic = '${searchResult.topic}' ORDER BY id DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -41,8 +41,23 @@ const getSearchedThreads = searchResult => {
     });
 };
 
+const getThreadsFromUser = user => {
+    var offset = user.page * 10;
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `SELECT * FROM "thread"  WHERE userid = '${user.id} ORDER BY threadid DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res.rows);
+        });
+    });
+}
+
 module.exports = {
   getThreads: getThreads,
   addThread: addThread,
-  getSearchedThreads:getSearchedThreads
+  getSearchedThreads:getSearchedThreads,
+  getThreadsFromUser:getThreadsFromUser
 };
