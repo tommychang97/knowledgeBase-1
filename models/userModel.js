@@ -44,9 +44,14 @@ const getUserPage = userid => {
 
 const signUp = registerInfo => {
     return new Promise((resolve, reject) => {
+        if (registerInfo.birthdate == "") {
+            console.log(registerInfo.birthdate);
+            registerInfo.birthdate = null;
+            console.log(registerInfo.birthdate);
+        }
         pg.query(
             `INSERT INTO users (firstname,lastname,password,email,imageurl,description,dob,country) VALUES 
-            ('${registerInfo.firstname}','${registerInfo.lastname}','${registerInfo.password}','${registerInfo.email}','${registerInfo.imageUrl}','${registerInfo.about}','${registerInfo.birthdate}','${registerInfo.country}')`
+            ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.about}$$,${registerInfo.birthdate},$$${registerInfo.country}$$)`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -92,9 +97,9 @@ const createUserSession = user => {
 const editProfile = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `UPDATE users SET firstname = '${user.firstname}', lastname = '${user.lastname}, imageurl = '${user.imageurl}', country = '${user.country}'
-            , dob = '${user.country}', description = '${user.description}' 
-             WHERE userid = '${user.id}'`
+            `UPDATE users SET firstname = $$${user.firstname}$$, lastname = $$${user.lastname}$$, imageurl = $$${user.imageurl}$$, country = $$${user.country}$$
+            , dob = ${user.birthdate}, description = $$${user.about}$$ 
+             WHERE userid = ${user.id}`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -109,7 +114,7 @@ const editProfile = user => {
 const incrementLike = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `UPDATE users SET likes = likes + 1 WHERE userid = '${user.id}`
+            `UPDATE users SET likes = likes + 1 WHERE userid = ${user.id}`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -123,7 +128,7 @@ const incrementLike = user => {
 const incrementPosts = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `UPDATE users SET posts = posts + 1 WHERE userid = '${user.id}'`
+            `UPDATE users SET posts = posts + 1 WHERE userid = ${user.id}`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -139,7 +144,7 @@ const incrementPosts = user => {
 const incrementMessages = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `UPDATE users SET messages = messages + 1 WHERE userid = '${user.id}`
+            `UPDATE users SET messages = messages + 1 WHERE userid = ${user.id}`
         ).then((res, err) => {
             if (err) {
                 reject(err);
