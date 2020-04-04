@@ -16,7 +16,7 @@ const getMessages = conversation => {
 const createMessage = message => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `INSERT INTO messages (conversationid, subject1id, subject2id, body, date) VALUES ('${message.conversationid}', '${message.subject1id}', '${message.subject2id}', '${message.body}', '${message.date}')`
+            `INSERT INTO messages (conversationid, subject1id, subject2id, body, date) VALUES ('${message.conversationid}', '${message.subject1id}', '${message.subject2id}', '${message.body}', 'now()')`
         ).then((res, err) => {
             if (err) {
                 reject(err);
