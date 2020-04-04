@@ -4,8 +4,7 @@ $BODY$
 BEGIN
 UPDATE users a
 SET posts = posts + 1
-FROM threads b
-WHERE a.userid = b.userid;
+WHERE a.userid = new.userid;
     RETURN new; 
 END;
 $BODY$
@@ -27,8 +26,7 @@ $BODY$
 BEGIN
 UPDATE threads a
 SET replyCount = replyCount + 1
-FROM posts b
-WHERE a.threadid = b.threadid;
+WHERE a.threadid = new.threadid;
     RETURN new; 
 END;
 $BODY$
@@ -46,8 +44,7 @@ $BODY$
 BEGIN
 UPDATE users a
 SET messages = messages + 1
-FROM conversations b
-WHERE a.userid = b.userid;
+WHERE a.userid = new.userid;
     RETURN new; 
 END;
 $BODY$

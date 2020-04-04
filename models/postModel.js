@@ -17,7 +17,7 @@ const getPosts = thread => {
 const addPost = post => {
   return new Promise((resolve, reject) => {
       pg.query(
-          `INSERT INTO posts (threadid,title,body,date,subject) VALUES ('${post.threadid}', '${post.title}','${post.body}','now()', '${post.subject}')`
+          `INSERT INTO posts (threadid,title,body,date) VALUES ('${post.threadid}', '${post.title}','${post.body}','now()')`
       ).then((res, err) => {
           if (err) {
               reject(err);

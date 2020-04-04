@@ -31,7 +31,7 @@ const getThreadsBySubject = searchResult => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM threads WHERE subject = '${searchResult.subject}' ORDER BY id DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads WHERE subject = '${searchResult.subject}' ORDER BY threadid DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -40,12 +40,11 @@ const getThreadsBySubject = searchResult => {
         });
     });
 };
-
 const getThreadsByTitle = searchResult => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM threads WHERE subject like '%${searchResult.title}%' ORDER BY id DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE subject like '%${searchResult.title}%' ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -59,7 +58,7 @@ const getThreadsFromUser = user => {
     var offset = user.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM threads WHERE userid = '${user.id} ORDER BY threadid DESC OFFSET '${offset}' ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE userid = ${user.id} ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);

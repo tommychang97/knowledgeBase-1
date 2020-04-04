@@ -17,7 +17,7 @@ CREATE TABLE users (
 
 CREATE TABLE sessions (
    userid integer NOT NULL,
-   sessionid integer NOT NULL,
+   sessionid VARCHAR(256) NOT NULL,
    CONSTRAINT session_pk PRIMARY KEY (sessionid),
    CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES users (userid)
 );
@@ -37,12 +37,13 @@ CREATE TABLE threads (
 CREATE TABLE posts (
     postid serial NOT NULL,
     threadid integer NOT NULL,
+    userid integer NOT NULL,
     title varchar(50) NOT NULL,
     body varchar(1000) NOT NULL,
     date date NOT NULL,
-    subject varchar(50) NOT NULL,
     CONSTRAINT post_pk PRIMARY KEY (postid, threadid),
-	CONSTRAINT threadid_fk FOREIGN KEY (threadid) REFERENCES threads(threadid)
+	CONSTRAINT threadid_fk FOREIGN KEY (threadid) REFERENCES threads(threadid),
+    CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
 CREATE TABLE conversations (
