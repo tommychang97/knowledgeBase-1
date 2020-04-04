@@ -1,6 +1,6 @@
 /* Left side of page ----------------------------------------------------------------------*/
 
-#div_left{
+#div_left {
     float: left;
     height: 500px;
     width: 300px;
@@ -8,14 +8,14 @@
     margin-top: 50px;
 }
 
-#div_profile_sum{
+#div_profile_sum {
     width: 100%;
     height: 270px;
     text-align: center;
 }
 
 /* ----------------------------------------------- */
-#img_profile{
+#img_profile {
     width: 150px;
     height: auto;
     margin: 0 auto;
@@ -23,35 +23,38 @@
     border-radius: 30px;
 }
 
-#img_profile img{
+#img_profile img {
     border-radius: 50%;
+    width: 150px;
+    height: 150px;
 }
 
-#div_profile_sum h2, p{
+#div_profile_sum h2,
+p {
     margin: 5px;
 }
 
-#div_profile_sum p{
+#div_profile_sum p {
     color: var(--text-color);
 }
 
 /* ----------------------------------------------- */
-#div_links{
+#div_links {
     width: 200px;
     height: 230px;
     margin: 0 auto;
 }
 
-.profile_links{
+.profile_links {
     color: black;
 }
 
-.profile_link_size{
+.profile_link_size {
     float: right;
 }
 
 /* Right side of page -----------------------------------------------------------------*/
-#div_right{
+#div_right {
     float: right;
     height: 800px;
     width: 640px;
@@ -60,23 +63,24 @@
 
 /* ----------------------------------------------- */
 
-#div_make_post{
+#div_make_post {
     width: 600px;
     height: 320px;
     padding-left: 30px;
 }
 
-#div_make_post h1{
+#div_make_post h1 {
     color: var(--text-color);
     margin-bottom: 15px;
 }
 
-#div_make_post input, textarea{
+#div_make_post input,
+textarea {
     width: 500px;
     margin-bottom: 10px;
 }
 
-.select_drop{
+.select_drop {
     height: 30px;
     background-color: white;
     border: solid 2px var(--base-color);
@@ -85,11 +89,11 @@
     cursor: pointer;
 }
 
-#post_select{
+#post_select {
     width: 200px;
 }
 
-#btn_post{
+#btn_post {
     border: solid 2px var(--base-color);
     color: var(--base-color);
     height: 30px;
@@ -97,106 +101,105 @@
     cursor: pointer;
     font-weight: bold;
     margin-left: 150px;
-
 }
 
 /* ----------------------------------------------- */
 
-#div_search_topic{
+#div_search_topic {
     width: 100%;
     height: 70px;
     padding-top: 10px;
 }
 
-#div_search_topic h3{
+#div_search_topic h3 {
     color: var(--text-color);
     float: left;
-    padding:5px;
+    padding: 5px;
     margin-right: 15px;
 }
 
-#topic_select{
+#topic_select {
     width: 200px;
 }
 
-#btn_topic_search{
+#btn_topic_search {
     width: 80px;
     height: 30px;
 }
 
 /* ----------------------------------------------- */
 
-#div_discussion{
+#div_discussion {
     width: 100%;
     height: 400px;
 }
 
-#div_discussion h2{
+#div_discussion h2 {
     color: var(--text-color);
 }
 
-.div_post{
+.div_post {
     width: 100%;
     height: 150px;
     margin-top: 10px;
 }
 
-.user_img{
+.user_img {
     width: 15%;
     float: left;
-    margin: 10px
+    margin: 10px;
 }
 
-.user_img img{
+.user_img img {
     width: 100%;
     height: auto;
     border-radius: 50%;
 }
 
-.post_body{
+.post_body {
     width: 75%;
     float: right;
     margin-left: 15px;
 }
 
-.post_head{
+.post_head {
     height: 40px;
     color: var(--text-color);
 }
 
-.post_head h3{
+.post_head h3 {
     float: left;
     font-size: 25px;
 }
 
-.btn_format_white.btn_topic{
+.btn_format_white.btn_topic {
     width: 70px;
     height: 30px;
     float: right;
     margin-right: 15px;
 }
 
-.post_text{
+.post_text {
     padding-left: 25px;
 }
 
-.post_info{
+.post_info {
     padding-left: 25px;
     margin-top: 5px;
     height: 20px;
 }
 
-.post_info p{
+.post_info p {
     float: left;
     margin-top: 0;
 }
 
-.post_info a{
+.post_info a {
     float: right;
     margin-right: 15px;
 }
 
-#post_detail{
+#post_detail {
     font-family: inherit;
     font-size: inherit;
     padding: 10px;
@@ -208,41 +211,41 @@
 /* ----------------------------------------------- */
 
 #searchView {
-    width:50%;
+    width: 50%;
 }
 
-.post_replies{
+.post_replies {
     width: 90%;
 }
 
-.div_reply_box{
+.div_reply_box {
     width: 90%;
 }
 
-.div_reply{
+.div_reply {
     width: 100%;
     height: 120px;
     margin-left: 20px;
 }
 
-.reply_img{
+.reply_img {
     width: 13%;
     float: left;
     margin-right: 10px;
 }
 
-.reply_img img{
+.reply_img img {
     width: 100%;
     height: auto;
     border-radius: 50%;
 }
 
-.reply_text{
+.reply_text {
     float: left;
-    width:74%;
+    width: 74%;
 }
 
-.reply_box{
+.reply_box {
     margin-left: 35px;
     width: 82%;
     height: 100px;
@@ -252,10 +255,10 @@
     padding: 10px;
 }
 
-.comment_button{
+.comment_button {
     float: right;
     color: white;
-    background-color: #00A2E8;
+    background-color: #00a2e8;
     margin-right: 8%;
     border: none;
     cursor: pointer;

@@ -4,11 +4,11 @@ const Pool = require('pg').Pool;
 
 const pool = new Pool({
     host: '127.0.0.1',
-    user: 'knowledgebase',
+    user: 'postgres',
     database: 'postgres',
-    password: 'dev',
+    password: 'sprite04051111',
     port: 5432,
-    ssl: true,
+    ssl: false
 });
 
 module.exports = pool;

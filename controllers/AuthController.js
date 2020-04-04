@@ -2,39 +2,73 @@
 
 const bcrypt = require('bcrypt');
 const passport = require('../util/passport');
+const userModel = require('../models/userModel');
 
 const saltRounds = 10;
 
 const authControls = {
+    home: (req, res) => {
+        console.log(`SessionID: ${req.session.Auth.sessionID}`);
+        res.render('home_page', { onHome: true, user: req.session.UserInfo });
+    },
     login: (req, res) => {
-        const { username, password } = req.body;
-        // fetch hashed password from db using username as query
-        // const hashedPassword = db.queryPassword;
-        let hashedPassword;
-        // bcrypt
-        //     .compare(password, hashedPassword)
-        //     .then(match => {
-        //         if (match) {
-        // passport authenticate
-        // fetch userID
-        const userID = "";
-        // create session
-        req.session.Auth = { userID, sessionID: req.sessionID };
-        res.redirect('home');
-        // }
-        // if fail, notify user somehow that the authenticate failed
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // });
-        // passport authenticate
-        // if pass, render home
+        //todo implement passport
+        const { email, password } = req.body;
+        userModel
+            .getUser(email)
+            .then(response => {
+                if (response.length) {
+                    const {
+                        password: hashedPassword,
+                        userid,
+                        imageurl,
+                        description,
+                        country,
+                        dob,
+                        messages,
+                        posts,
+                        likes,
+                        firstname,
+                        lastname,
+                    } = response[0];
+                    bcrypt.compare(password, hashedPassword).then(match => {
+                        if (match) {
+                            req.session.Auth = {
+                                id: userid,
+                                sessionID: req.sessionID,
+                            };
+                            req.session.UserInfo = {
+                                name: `${firstname} ${lastname}`,
+                                image: imageurl,
+                                description: description,
+                                country: country,
+                                birthdate: dob,
+                                posts,
+                                messages,
+                                likes,
+                            };
+                            res.redirect('home');
+                        } else {
+                            res.redirect('');
+                        }
+                    });
+                } else {
+                    res.redirect('/');
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     },
     logout: (req, res) => {
-        req.session.Auth.userID;
-        // destroy session from db
-        // redirect to landing page
+        userModel;
+        // .deleteUserSession(req.session.Auth)
+        // .then(() => {
         res.redirect('/');
+        // })
+        // .catch(err => {
+        //     console.log('Failed to log out', err);
+        // });
     },
     signup: (req, res) => {
         req.session.signup = req.body; // pass signup form to register form
@@ -52,10 +86,10 @@ const authControls = {
                 form.password = hashedPassword;
                 console.log(form);
                 // register user into db
-                //  db.signup(form);
+                userModel.signUp(form);
             })
             .catch(err => {
-                reject(err);
+                console.log(err);
             });
         res.redirect('home');
     },

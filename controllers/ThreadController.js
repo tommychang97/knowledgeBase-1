@@ -1,18 +1,24 @@
 'use strict';
 
-const postControls = {
-    createPost: (req, res) => {
-        const form = { userID: req.session.Auth.userID, ...req.body };
+const threadModel = require('../models/threadModel');
+
+const threadControls = {
+    createThread: (req, res) => {
+        const form = {
+            userid: req.session.Auth.id,
+            ...req.body,
+            date: '2020-04-20',
+        };
         console.log(form);
-        // update db
-        // rerender home
-        res.redirect('/home');
+        threadModel.addThread(form).then(result => {
+            res.redirect('/home');
+        });
     },
     get: (req, res) => {
-        console.log('get posts');
+        console.log('get threads');
         if (req.params.postId) {
             const postID = req.params.postId; //ids start at 1
-            console.log('Fetching specific post: ', postID);
+            console.log('Fetching specific thread: ', postID);
         }
         res.render('messagesView');
         //db.getMessages
@@ -29,4 +35,4 @@ const postControls = {
     sendComment: (req, res) => {},
 };
 
-module.exports = postControls;
+module.exports = threadControls;

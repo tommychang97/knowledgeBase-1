@@ -1,12 +1,12 @@
 <div id="div_make_post">
     <h1>whats your question today?</h1>
-    <form action="/post" method="POST">
-        <input name="post_subject" class="input_format" type="text" placeholder="subject" />
+    <form action="/createThread" method="POST">
+        <input name="title" class="input_format" type="text" placeholder="subject" />
         <br />
-        <textarea name="post_content" id="post_detail" cols="30" rows="10"
+        <textarea name="body" id="post_detail" cols="30" rows="10"
             placeholder="explain in detail ...."></textarea>
         <br />
-        <select name="post_topic" class="select_drop" id="post_select">
+        <select name="subject" class="select_drop" id="post_select">
             <option value="" disabled selected>Topic</option>
             <option value="php">php</option>
             <option value="nodejs">nodejs</option>

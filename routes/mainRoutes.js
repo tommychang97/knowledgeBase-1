@@ -7,7 +7,7 @@ const router = express.Router();
 
 const authController = require('../controllers/AuthController');
 const msgController = require('../controllers/MessageController');
-const postController = require('../controllers/PostController');
+const threadController = require('../controllers/ThreadController');
 const profileController = require('../controllers/ProfileController');
 
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -21,10 +21,7 @@ router.get('/', (req, res) => {
 /** Authentication  */
 router.post('/signup', authController.signup);
 
-router.get('/home', function(req, res) {
-    // console.log(`SessionID: ${req.session.Auth.sessionID}`);
-    res.render('home_page', { onHome: true });
-});
+router.get('/home', authController.home);
 
 router.post('/login', authController.login);
 
@@ -44,17 +41,29 @@ router.post('/home/user/:userId/like', profileController.sendLike);
 
 router.post('/home/user/:userId/message', profileController.sendMessage);
 
-/** Posts == Discussion */
-router.post('/post', postController.createPost);
+/** Thread */
+router.post('/createThread', threadController.createThread);
 
-router.get('/home/search', postController.search);
+router.get('/home/search', threadController.search);
 
-router.get('/home/posts/:postId?/:search?', postController.get);
+router.get('/home/threads/:threadId?/:search?', threadController.get);
 
 router.post(
-    '/home/user/:userId/posts/:postId/comment',
-    postController.sendComment
+    '/home/user/:userId/threads/:postId/comment',
+    threadController.sendComment
 );
+
+/** Posts */
+// router.post('/post', postController.createPost);
+
+// router.get('/home/search', postController.search);
+
+// router.get('/home/posts/:postId?/:search?', postController.get);
+
+// router.post(
+//     '/home/user/:userId/posts/:postId/comment',
+//     postController.sendComment
+// );
 
 /** Messages  */
 
