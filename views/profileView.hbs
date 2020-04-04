@@ -8,8 +8,8 @@
     </div>
     <div id="div_top_right">
         {{#if onProfile}}
-        <form action="/home/user/{{user.userid}}/conversation/create" method="POST">
-        {{!-- <form action="/home/user/{{user.userid}}/message" method="GET"> --}}
+        <form action="/home/user/{{user.userid}}/conversations/create" method="GET">
+            {{!-- <form action="/home/user/{{user.userid}}/message" method="GET"> --}}
             <button type="submit" class="message_button">Message</button>
         </form>
         <form action="/home/user/{{user.userid}}/like" method="POST">
@@ -21,7 +21,7 @@
         </form>
         <p>
             <span class="user_profile_link_size">{{user.posts}}</span>
-            <a class="user_profile_links" href="/">Posts</a>
+            <a class="user_profile_links">Posts</a>
         </p>
 
         {{/if}}

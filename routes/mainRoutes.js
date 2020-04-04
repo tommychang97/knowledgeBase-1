@@ -67,15 +67,17 @@ router.post(
 
 /** Messages  */
 
-router.get('/home/user/:userId/message/:msgId?', msgController.get);
+router.get('/home/user/:userId/messages/:msgId?', msgController.get);
 
-router.post('/home/user/:userId/message/send', msgController.sendMessage);
+router.post('/home/user/:userId/messages/send', msgController.sendMessage);
 
 
-/** Messages  */
+/** Conversations  */
 
-router.get('/home/user/:userId/conversation/:conversationId?', convoController.get);
+router.get('/home/user/:userId/conversations/create', convoController.getForm);
 
-router.post('/home/user/:userId/conversation/create', convoController.create);
+router.get('/home/user/:userId/conversations/:conversationId?', convoController.getConversation);
+
+router.post('/home/user/:userId/conversations/create', convoController.create);
 
 module.exports = router;

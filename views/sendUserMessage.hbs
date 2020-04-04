@@ -6,10 +6,12 @@
         </div>
     </div>
     <div id="div_left">
-        <input class="input_format" type="text" placeholder="subject" />
-        <br />
-        <textarea name="" id="message_detail" cols="30" rows="10" placeholder="message details ...."></textarea>
-        <br />
-        <button class="send_message_button">Message</button>
+        <form action="/home/user/{{userid}}/conversations/create" method="POST">
+            <input name="subject" class="input_format" type="text" placeholder="subject" />
+            <br />
+            <textarea name="body" id="message_detail" cols="30" rows="10" placeholder="message details ...."></textarea>
+            <br />
+            <button type="submit" class="send_message_button">Message</button>
+        </form>
     </div>
 </div>

@@ -1,32 +1,28 @@
-
 <div class="div_write_message">
-    <textarea 
-        id="write_message" 
-        name="msg_content" 
-        placeholder="Write a message ...."
-        onkeyup="canSend()"
-    ></textarea>
+    <textarea id="write_message" name="msg_content" placeholder="Write a message ...." onkeyup="canSend()"></textarea>
 </div>
 <div class="div_send_message">
-    <button id="message_box_button">Send</button>
+    <form action="/home/user/{{userid}}/conversations/create" method="POST">
+        <button id="message_box_button">Send</button>
+    </form>
 </div>
 
-<script type="text/javascript">    
+<script type="text/javascript">
     const messageBoxButton = document.getElementById("message_box_button");
     messageBoxButton.style.cursor = "not-allowed";
-    messageBoxButton.disabled = true; 
+    messageBoxButton.disabled = true;
     messageBoxButton.style.backgroundColor = "#3c7fc28c";
-    
+
     messageBoxButton.onclick = function () {
         console.log("test");
     }
 
     function canSend() {
-        if(document.getElementById("write_message").value==="") { 
-            messageBoxButton.disabled = true; 
+        if (document.getElementById("write_message").value === "") {
+            messageBoxButton.disabled = true;
             messageBoxButton.style.backgroundColor = "#3c7fc28c";
             messageBoxButton.style.cursor = "not-allowed";
-        } else { 
+        } else {
             messageBoxButton.disabled = false;
             messageBoxButton.style.backgroundColor = "#00A2E8";
             messageBoxButton.style.cursor = "pointer";
