@@ -34,7 +34,7 @@ const signUp = registerInfo => {
 const deleteUserSession = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `DELETE FROM sessions WHERE userid = '${user.id}'`
+            `DELETE FROM sessions WHERE userid = ${user.id}`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -49,7 +49,7 @@ const deleteUserSession = user => {
 const createUserSession = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `INSERT INTO sessions (userid, sessionid) VALUES ('${user.id}', '${user.sessionid}');`
+            `INSERT INTO sessions (userid, sessionid) VALUES (${user.id}, '${user.sessionid}');`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -95,7 +95,7 @@ const incrementLike = user => {
 const incrementPosts = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `UPDATE users SET posts = posts + 1 WHERE userid = '${user.id}`
+            `UPDATE users SET posts = posts + 1 WHERE userid = '${user.id}'`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -130,6 +130,6 @@ module.exports = {
     signUp: signUp,
     editProfile: editProfile,
     incrementLike: incrementLike,
-    intcrementPosts: incrementPosts,
+    incrementPosts: incrementPosts,
     incrementMessages: incrementMessages
 };
