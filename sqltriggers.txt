@@ -19,6 +19,27 @@ FOR EACH ROW
 EXECUTE PROCEDURE update_posts_count();
 
 
+
+
+CREATE OR REPLACE FUNCTION update_replies_count()
+RETURNS trigger AS
+$BODY$
+BEGIN
+UPDATE threads a
+SET replyCount = replyCount + 1
+FROM posts b
+WHERE a.threadid = b.threadid;
+    RETURN new; 
+END;
+$BODY$
+ LANGUAGE plpgsql VOLATILE;
+
+CREATE TRIGGER replies_trigger
+AFTER INSERT
+ON posts
+FOR EACH ROW
+EXECUTE PROCEDURE update_replies_count();
+
 CREATE OR REPLACE FUNCTION update_messages_count()
 RETURNS trigger AS
 $BODY$
@@ -37,6 +58,7 @@ AFTER INSERT
 ON messages
 FOR EACH ROW
 EXECUTE PROCEDURE update_messages_count();
+
 
 
 
