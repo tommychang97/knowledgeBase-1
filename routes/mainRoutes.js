@@ -59,6 +59,8 @@ router.post(
 
 router.get('/home/user/:id/messages/:msgId', msgController.get);
 
+router.get('/home/user/:id/messages', msgController.getMessages);
+
 router.post('/home/user/:id/messages/:msgId/send', msgController.sendMessage);
 
 module.exports = router;
