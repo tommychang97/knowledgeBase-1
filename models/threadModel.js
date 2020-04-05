@@ -16,6 +16,7 @@ const getThreads = page => {
 
 const addThread = thread => {
   return new Promise((resolve, reject) => {
+      
       pg.query(
         `INSERT INTO threads (userid,title,body,date,subject) VALUES (${thread.userid}, $$${thread.title}$$,$$${thread.body}$$,'now()', $$${thread.subject}$$)`
       ).then((res, err) => {

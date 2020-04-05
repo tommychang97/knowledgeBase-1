@@ -4,20 +4,16 @@ const bcrypt = require('bcrypt');
 const passport = require('../util/passport');
 const db = require('../util/postgres');
 const userModel = require('../models/userModel');
+const threadModel = require('../models/threadModel');
 
 const saltRounds = 10;
 
 const authControls = {
     login: (req, res) => {
         const {email, password} = req.body;
-        const userResults = userModel.getUser(email);
+        const userResults = threadModel.getThreads(0);
         userResults.then((data) => {
-            if (data === undefined || data.length == 0) {
-                console.log("No such person found!");
-                // if fail, notify user somehow that the combination of email/pw is invalid 
-            }
-            else {
-                console.log(data);
+                console.log(data[0]["date"]);
                 const hashedPassword = "123";
                 // fetch hashed password from db using username as query
                 // const hashedPassword = db.queryPassword;
@@ -36,7 +32,7 @@ const authControls = {
                     // });
                 // passport authenticate
                 // if pass, render home
-            }
+        
         }).catch(function(error) {
             console.log(error);
         }) 
