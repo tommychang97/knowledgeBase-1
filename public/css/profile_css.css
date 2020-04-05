@@ -12,9 +12,14 @@
     float: left;
 }
 
+#div_user_profile_sum h3{
+    font-size: 20pt;
+}
+
 #div_top_left{
     width: 70%;
 }
+
 
 /* ----------------------------------------------- */
 #img_profile{
@@ -76,7 +81,7 @@
     color: white;
     background-color: rgb(25, 111, 192);
     border: none;
-    padding: 5px;
+    padding: 10px;
     border-radius: 8%;
     cursor: pointer;
 }
@@ -98,6 +103,15 @@
     padding-right: 4px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.user_profile_link_size{
+    color: rgb(15, 128, 177);
+}
+
+.user_profile_links{
+    color: rgb(15, 128, 177);
+    text-decoration: none;
 }
 
 .input_format{
@@ -184,6 +198,7 @@
 
 .post_replies{
     width: 90%;
+    float: left;
 }
 
 .div_reply_box{
@@ -193,7 +208,8 @@
 
 .div_reply{
     width: 90%;
-    height: 150px;
+    min-height: 100px;
+    margin-top: 20px;
     margin-left: 20px;
 }
 
@@ -239,4 +255,8 @@
 
 #div_bottom{
     width: 100%;
+}
+
+#div_user_posts{
+    width:80%;
 }
