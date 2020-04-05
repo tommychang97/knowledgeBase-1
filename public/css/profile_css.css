@@ -12,9 +12,14 @@
     float: left;
 }
 
-#div_top_left {
+#div_user_profile_sum h3{
+    font-size: 20pt;
+}
+
+#div_top_left{
     width: 70%;
 }
+
 
 /* ----------------------------------------------- */
 #img_profile {
@@ -77,7 +82,7 @@ p {
     color: white;
     background-color: rgb(25, 111, 192);
     border: none;
-    padding: 5px;
+    padding: 10px;
     border-radius: 8%;
     cursor: pointer;
 }
@@ -101,7 +106,16 @@ p {
     cursor: pointer;
 }
 
-.input_format {
+.user_profile_link_size{
+    color: rgb(15, 128, 177);
+}
+
+.user_profile_links{
+    color: rgb(15, 128, 177);
+    text-decoration: none;
+}
+
+.input_format{
     margin-bottom: 20px;
 }
 
@@ -124,6 +138,7 @@ p {
     width: 80%;
     height: 150px;
     margin-top: 10px;
+    margin-left: 40px;
 }
 
 .user_img {
@@ -185,6 +200,7 @@ p {
 
 .post_replies {
     width: 90%;
+    float: left;
 }
 
 .div_reply_box {
@@ -193,7 +209,8 @@ p {
 
 .div_reply {
     width: 90%;
-    height: 150px;
+    min-height: 100px;
+    margin-top: 20px;
     margin-left: 20px;
 }
 
@@ -239,4 +256,8 @@ p {
 
 #div_bottom {
     width: 100%;
+}
+
+#div_user_posts{
+    width:80%;
 }

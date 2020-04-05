@@ -1,6 +1,7 @@
 'use strict';
 
 const convoModel = require('../models/conversationModel');
+const messageModel = require('../models/messageModel');
 const userModel = require('../models/userModel');
 
 const conControls = {
@@ -39,17 +40,25 @@ const conControls = {
             });
     },
     create: (req, res) => {
-        const userInformation = {
-            firstuserid: req.session.Auth.id,
-            // name: `${req.session.UserInfo.firstname} ${req.session.UserInfo.lastname}`,
-            seconduserid: req.params.userId,
+        const form = {
+            senderid: req.session.Auth.id,
+            receiverid: req.params.userId,
+            topic: req.body.topic,
         };
-        const form = { ...req.body };
 
         console.log(form);
-        convoModel.createConversation(userInformation).then((result) => {
-            res.redirect(`/home/profile/${req.params.userId}`);
-            console.log('Created convo', result);
+        convoModel.createConversation(form).then((response) => {
+            console.log('Created convo', response);
+            const message = {
+                conversationid: response[0].conversationid,
+                ...req.body,
+            };
+            messageModel.createMessage(message).then((result) => {
+                if (err) {
+                    console.log("Failed to create message", err);
+                }
+                res.redirect(`/home/profile/${req.params.userId}`);
+            });
         });
     },
 };

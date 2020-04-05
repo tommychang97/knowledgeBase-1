@@ -21,6 +21,17 @@ const profileControls = {
                 console.log(err);
             });
     },
+    getPosts: (req, res) => {
+        const userId = req.params.userId;
+        //db.getMessages
+
+        const results = { onHome: true};
+        res.render('allPostsView', results)
+    },
+    editProfile: (req, res) => {
+        const results = { onHome: true};
+        res.render('editProfileView', results)
+    },
     edit: (req, res) => {
         const {
             firstname,
