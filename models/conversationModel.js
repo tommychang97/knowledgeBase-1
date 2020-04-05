@@ -17,7 +17,7 @@ const createConversation = users => {
     return new Promise((resolve, reject) => {
         pg.query(
             `INSERT INTO conversations (senderid, receiverid, topic, conversationdate) VALUES 
-            (${users.senderid}, ${users.receiverid}, $$${users.topic}$$, now())`
+            (${users.senderid}, ${users.receiverid}, $$${users.topic}$$, 'now()')`
         ).then((res, err) => {
             if (err) {
                 reject(err);
