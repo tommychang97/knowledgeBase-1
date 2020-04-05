@@ -1,33 +1,5 @@
-<div class="div_post">
-    <div class="user_img">
-        <a href="/home/profile/{{userid}}" type="text/html">
-            <img src={{imageurl}} alt="">
-        </a>
-    </div>
 
-    <div class="post_body">
-
-        <div class="post_head">
-            <h3>{{title}}</h3>
-            <button class="btn_format_white btn_topic">{{subject}}</button>
-        </div>
-
-        <div class="post_text">
-            {{body}}
-        </div>
-
-        <div class="post_info">
-            <p>{{date}}</p>
-            <a id="showreplies" href="javascript:;">{{replycount}} replies</a>
-        </div>
-    </div>
-
-    <div class="post_replies"></div>
-    <div class="div_reply_box"></div>
-</div>
-
-<<<<<<< HEAD
-<script type="text/javascript">
+window.onload = function () {
     document.getElementById("showreplies").onclick = function () {
         console.log(this.parentElement.parentElement.parentElement);
         const divPost = this.parentElement.parentElement.parentElement;
@@ -124,7 +96,4 @@
             }
         }
     }
-</script>
-=======
-<script type="text/javascript" src="/js/post.js"></script>
->>>>>>> 2954b81c98a5f51694505a3d6767957289051d7a
+};
