@@ -48,21 +48,22 @@ CREATE TABLE posts (
 
 CREATE TABLE conversations (
     conversationid serial NOT NULL,
-    subject1id integer NOT NULL,
-    subject2id integer NOT NULL,
-    conversationsubject varchar(250),
-    CONSTRAINT convo_pk PRIMARY KEY (conversationid, subject1id, subject2id)
+    senderid integer NOT NULL,
+    receiverid integer NOT NULL,
+    topic varchar(250),
+    conversationdate date,
+    CONSTRAINT convo_pk PRIMARY KEY (conversationid, senderid, receiverid)
 );
 
 
 CREATE TABLE messages (
     messageid serial NOT NULL,
-	subject1id integer NOT NULL,
-    subject2id integer NOT NULL,
+	senderid integer NOT NULL,
+    receiverid integer NOT NULL,
     conversationid integer NOT NULL,
     body varchar(1000) NOT NULL,
 	date date NOT NULL,
     CONSTRAINT message_pk PRIMARY KEY (messageid, conversationid),
-	CONSTRAINT convoid_fk FOREIGN KEY (conversationid,subject1id,subject2id) REFERENCES conversations(conversationid,subject1id,subject2id)
+	CONSTRAINT convoid_fk FOREIGN KEY (conversationid,senderid,receiverid) REFERENCES conversations(conversationid,senderid,receiverid)
 );
     
