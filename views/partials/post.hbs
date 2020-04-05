@@ -1,25 +1,21 @@
 <div class="div_post">
     <div class="user_img">
-        <!--<img src={{post.image}} alt="">-->
-        <img src="https://randomuser.me/api/portraits/women/48.jpg" alt="">
+        <img src={{post.image}} alt="">
     </div>
 
     <div class="post_body">
 
         <div class="post_head">
-            <!--<h3>{{post.title}}</h3>-->
-            <h3>Title of post</h3>
+            <h3>{{post.title}}</h3>
             <button class="btn_format_white btn_topic">{{topic}}</button>
         </div>
 
         <div class="post_text">
             {{post.text}}
-            Test this post text
         </div>
 
         <div class="post_info">
-            <!--<p>{{post.date}}</p>-->
-            <p>11 Sep 2019</p>
+            <p>{{post.date}}</p>
             <a id="showreplies" href="javascript:;">{{post.replies}} replies</a>
         </div>
     </div>

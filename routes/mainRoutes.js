@@ -38,6 +38,10 @@ router.post('/register', authController.register);
 
 router.get('/home/user/:userId', profileController.get);
 
+router.get('/home/user/:userId/posts', profileController.getPosts);
+
+router.get('/home/user/:userId/edit', profileController.editProfile);
+
 router.post('/home/user/:userId/edit', profileController.edit);
 
 router.post('/home/user/:userId/like', profileController.sendLike);

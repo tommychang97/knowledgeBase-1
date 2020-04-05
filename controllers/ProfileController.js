@@ -8,6 +8,17 @@ const profileControls = {
         const userProfile = { onProfile: true };
         res.render('profileView', userProfile);
     },
+    getPosts: (req, res) => {
+        const userId = req.params.userId;
+        //db.getMessages
+
+        const results = { onHome: true};
+        res.render('allPostsView', results)
+    },
+    editProfile: (req, res) => {
+        const results = { onHome: true};
+        res.render('editProfileView', results)
+    },
     edit: (req, res) => {
         const { name, imageUrl, country, birthdate } = req.body;
         // db.updateUser({name, imageUrl, country, birthdate});
