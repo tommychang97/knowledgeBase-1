@@ -45,13 +45,15 @@ const getUserPage = userid => {
 const signUp = registerInfo => {
     return new Promise((resolve, reject) => {
         if (registerInfo.birthdate == "") {
-            console.log(registerInfo.birthdate);
-            registerInfo.birthdate = null;
-            console.log(registerInfo.birthdate);
+            var query = `INSERT INTO users (firstname,lastname,password,email,imageurl,description,dob,country) VALUES 
+            ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.about}$$,null,$$${registerInfo.country}$$)`
+        }
+        else {
+            var query = `INSERT INTO users (firstname,lastname,password,email,imageurl,description,dob,country) VALUES 
+            ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.about}$$,'${registerInfo.birthdate}',$$${registerInfo.country}$$)`
         }
         pg.query(
-            `INSERT INTO users (firstname,lastname,password,email,imageurl,description,dob,country) VALUES 
-            ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.about}$$,${registerInfo.birthdate},$$${registerInfo.country}$$)`
+           query
         ).then((res, err) => {
             if (err) {
                 reject(err);
