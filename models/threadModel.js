@@ -1,34 +1,34 @@
-let pg = require("../util/postgres");
+let pg = require('../util/postgres');
 
-const getThreads = page => {
-  return new Promise((resolve, reject) => {
-      var offset = page * 10;
-      pg.query(
-          `SELECT * FROM threads ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY`
-      ).then((res, err) => {
-          if (err) {
-              reject(err);
-          }
-          resolve(res.rows);
-      });
-  });
+const getThreads = (page) => {
+    return new Promise((resolve, reject) => {
+        var offset = page * 10;
+        pg.query(
+            `SELECT * FROM threads INNER JOIN users on threads.userid = users.userid ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res.rows);
+        });
+    });
 };
 
-const addThread = thread => {
-    console.log("addthread");
-  return new Promise((resolve, reject) => {
-      pg.query(
-        `INSERT INTO threads (userid,title,body,date,subject) VALUES (${thread.userid}, $$${thread.title}$$,$$${thread.body}$$,'now()', $$${thread.subject}$$)`
-      ).then((res, err) => {
-          if (err) {
-              reject(err);
-          }
-          resolve(res);
-      });
-  });
+const addThread = (thread) => {
+    console.log('addthread');
+    return new Promise((resolve, reject) => {
+        pg.query(
+            `INSERT INTO threads (userid,title,body,date,subject) VALUES (${thread.userid}, $$${thread.title}$$,$$${thread.body}$$,'now()', $$${thread.subject}$$)`
+        ).then((res, err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(res);
+        });
+    });
 };
 
-const getThreadsBySubject = searchResult => {
+const getThreadsBySubject = (searchResult) => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
@@ -41,11 +41,12 @@ const getThreadsBySubject = searchResult => {
         });
     });
 };
-const getThreadsByTitle = searchResult => {
+const getThreadsByTitle = (searchResult) => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE subject like '%${searchResult.title}%' ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE title
+             like '%${searchResult.title}%' ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -55,7 +56,7 @@ const getThreadsByTitle = searchResult => {
     });
 };
 
-const getThreadsFromUser = user => {
+const getThreadsFromUser = (user) => {
     var offset = user.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
@@ -67,12 +68,12 @@ const getThreadsFromUser = user => {
             resolve(res.rows);
         });
     });
-}
+};
 
 module.exports = {
-  getThreads: getThreads,
-  addThread: addThread,
-  getThreadsBySubject:getThreadsBySubject,
-  getThreadsByTitle:getThreadsByTitle,
-  getThreadsFromUser:getThreadsFromUser,
+    getThreads: getThreads,
+    addThread: addThread,
+    getThreadsBySubject: getThreadsBySubject,
+    getThreadsByTitle: getThreadsByTitle,
+    getThreadsFromUser: getThreadsFromUser,
 };

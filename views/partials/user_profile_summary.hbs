@@ -1,14 +1,13 @@
 <div id="div_user_profile_sum">
     {{!-- <a href="/home/profile/{{user.id}}" type="text/html"> --}}
-    <div id="img_profile">
-        <!-- user.image -->
-        <img src="{{user.imageurl}}" alt="user" />
-    </div>
+    <a href="/home/profile/{{user.userid}}">
+        <div id="img_profile">
+            <!-- user.image -->
+            <img src="{{user.imageurl}}" alt="user" />
+        </div>
+    </a>
     {{!-- </a> --}}
     <h2>{{user.firstname}} {{user.lastname}}</h2>
     <p>{{user.description}}</p>
     <p>{{user.country}}</p>
-    <h3>Melinda Gates</h3>
-    <p>Team lead | Part time employee | Full time quarantined</p>
-    <p class="country">Canada</p>
 </div>

@@ -3,7 +3,7 @@ let pg = require("../util/postgres");
 const getConversations = user => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM conversations INNER JOIN users WHERE senderid = ${user.id} OR receiverid = ${user.id};`
+            `SELECT * FROM conversations INNER JOIN users on users.userid = conversations.senderid WHERE senderid = ${user.id} OR receiverid = ${user.id};`
         ).then((res, err) => {
             if (err) {
                 reject(err);

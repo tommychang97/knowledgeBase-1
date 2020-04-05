@@ -9,12 +9,12 @@ const profileControls = {
         userModel
             .getUserPage(userId)
             .then((response) => {
-                console.log(response);
                 const userProfile = {
                     onProfile: true,
                     user: response.userInfo,
                     posts: response.userThreads,
                 };
+                console.log(userProfile);
                 res.render('profileView', userProfile);
             })
             .catch((err) => {
@@ -55,7 +55,7 @@ const profileControls = {
                         user: response.userInfo,
                         posts: response.userThreads,
                     };
-                    res.render('profileView', userProfile);
+                    res.redirect(`/home/profile/${userId}`);
                 })
                 .catch((err) => {
                     console.log(err);

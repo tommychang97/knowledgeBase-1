@@ -25,7 +25,7 @@ const getUserPage = userid => {
             }
             data["userInfo"] = res.rows[0];
             pg.query(
-                `SELECT threads.title, threads.body, threads.date, threads.subject, threads.replycount, users.imageurl FROM users INNER JOIN threads ON users.userid = threads.userid WHERE threads.userid = ${userid}`
+                `SELECT threads.title, threads.body, threads.date, threads.subject, threads.replycount, users.imageurl, users.userid FROM users INNER JOIN threads ON users.userid = threads.userid WHERE threads.userid = ${userid}`
             ).then((res, err) => {
                 if (err) {
                     reject(err);

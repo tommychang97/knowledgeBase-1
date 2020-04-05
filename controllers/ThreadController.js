@@ -21,6 +21,9 @@ const threadControls = {
             .getThreadsFromUser({ id: req.params.userId, page: 0 })
             .then((response) => {
                 console.log(response);
+                req.session.UserInfo.messages = response[0].messages;
+                req.session.UserInfo.posts = response[0].posts;
+                req.session.UserInfo.likes = response[0].likes;
                 res.render('home_page', {
                     onHome: true,
                     user: { ...req.session.UserInfo, id: req.session.Auth.id },
@@ -33,14 +36,16 @@ const threadControls = {
             threadModel
                 .getThreadsByTitle({ title: req.query.searchValue, page: 0 })
                 .then((response) => {
-                    const results = { onHome: true, response };
+                    console.log("getThreadsByTitle ONE: ", response);
+                    const results = { onHome: true, posts: response };
                     res.render('searchView', results);
                 });
         } else if (req.query.subject) {
             threadModel
                 .getThreadsBySubject({ subject: req.query.subject, page: 0 })
                 .then((response) => {
-                    const results = { onHome: true, response };
+                    console.log("getThreadsBySubject ALL", response);
+                    const results = { onHome: true, posts: response };
                     res.render('searchView', results);
                 });
         }
