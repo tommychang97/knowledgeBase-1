@@ -60,7 +60,7 @@ router.get(
 // );
 
 /** Posts */
-router.post('/post', postController.create);
+router.post('/home/threads/:threadId/post', postController.add);
 
 router.get('/home/posts/:postId?/:search?', postController.get);
 

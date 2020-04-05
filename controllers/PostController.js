@@ -3,8 +3,15 @@
 const postModel = require('../models/postModel');
 
 const post = {
-    create: (req, res) => {
-        const form = { ...req.body };
+    add: (req, res) => {
+        const threadid = req.params.threadId;
+        console.log('parse input from form...', { ...req.body });
+        const post = {
+            threadid,
+            id: req.session.Auth.id,
+            body: 'TEST STRING FROM SERVER',
+        };
+        console.log(post);
     },
     get: (req, res) => {},
     sendComment: (req, res) => {},
