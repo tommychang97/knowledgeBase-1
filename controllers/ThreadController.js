@@ -16,11 +16,16 @@ const threadControls = {
         });
     },
     get: (req, res) => {
+        console.log('thread get', req.session.UserInfo);
         threadModel
             .getThreadsFromUser({ id: req.params.userId, page: 0 })
             .then((response) => {
                 console.log(response);
-                res.render('messagesView', response);
+                res.render('home_page', {
+                    onHome: true,
+                    user: { ...req.session.UserInfo, id: req.session.Auth.id },
+                    posts: response,
+                });
             });
     },
     search: (req, res) => {
@@ -40,7 +45,6 @@ const threadControls = {
                 });
         }
     },
-    sendComment: (req, res) => {},
 };
 
 module.exports = threadControls;

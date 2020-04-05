@@ -3,7 +3,7 @@ CREATE TABLE users (
     imageurl varchar(128),
     country varchar(50),
     description varchar(250),
-    dob date NOT NULL,
+    dob date,
     messages integer DEFAULT 0, 
     posts integer DEFAULT 0,
     likes integer DEFAULT 0,
@@ -17,7 +17,7 @@ CREATE TABLE users (
 
 CREATE TABLE sessions (
    userid integer NOT NULL,
-   sessionid integer NOT NULL,
+   sessionid VARCHAR(256) NOT NULL,
    CONSTRAINT session_pk PRIMARY KEY (sessionid),
    CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES users (userid)
 );
@@ -29,6 +29,7 @@ CREATE TABLE threads (
     body varchar(1000) NOT NULL,
     date date NOT NULL,
     subject varchar(50) NOT NULL,
+    replyCount integer DEFAULT 0,
     CONSTRAINT thread_pk PRIMARY KEY (threadid),
 	CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES users(userid)
 );
@@ -36,12 +37,13 @@ CREATE TABLE threads (
 CREATE TABLE posts (
     postid serial NOT NULL,
     threadid integer NOT NULL,
+    userid integer NOT NULL,
     title varchar(50) NOT NULL,
     body varchar(1000) NOT NULL,
     date date NOT NULL,
-    subject varchar(50) NOT NULL,
     CONSTRAINT post_pk PRIMARY KEY (postid, threadid),
-	CONSTRAINT threadid_fk FOREIGN KEY (threadid) REFERENCES thread(threadid)
+	CONSTRAINT threadid_fk FOREIGN KEY (threadid) REFERENCES threads(threadid),
+    CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
 CREATE TABLE conversations (
@@ -61,5 +63,6 @@ CREATE TABLE messages (
     body varchar(1000) NOT NULL,
 	date date NOT NULL,
     CONSTRAINT message_pk PRIMARY KEY (messageid, conversationid),
-	CONSTRAINT convoid_fk FOREIGN KEY (conversationid,subject1id,subject2id) REFERENCES conversation(conversationid,subject1id,subject2id)
+	CONSTRAINT convoid_fk FOREIGN KEY (conversationid,subject1id,subject2id) REFERENCES conversations(conversationid,subject1id,subject2id)
 );
+    

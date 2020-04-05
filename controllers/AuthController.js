@@ -63,7 +63,7 @@ const authControls = {
                             userModel.createUserSession(req.session.Auth);
                             res.redirect('home');
                         } else {
-                            res.redirect('');
+                            res.redirect('/');
                         }
                     });
                 } else {

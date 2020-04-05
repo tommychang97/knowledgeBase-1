@@ -1,24 +1,47 @@
 'use strict';
 
 const convoModel = require('../models/conversationModel');
+const userModel = require('../models/userModel');
 
 const conControls = {
     getForm: (req, res) => {
-        res.render('sendUserMessage', {
-            onMessages: true,
-            userid: req.params.userId,
+        const userIdToMessage = req.params.userId;
+        userModel.getUserPage(userIdToMessage).then((response) => {
+            const userDetails = { ...response.userInfo };
+            res.render('sendUserMessage', {
+                onMessages: true,
+                user: {
+                    id: req.params.userId,
+                    imageurl: userDetails.imageurl,
+                },
+            });
         });
     },
-    getConversation: (req, res) => {
-        console.log(req.params.userId);
-        res.render('messagesView', {
-            onMessages: 'true',
-            userid: req.params.userId,
-        });
+    getConversations: (req, res) => {
+        if (req.params.conversationId) {
+            console.log(
+                'SPECIFIC CONVERSATION FETCHED',
+                req.params.conversationId
+            );
+        }
+        convoModel
+            .getConversations({ id: req.session.Auth.id })
+            .then((response) => {
+                console.log(
+                    `CONVERSATIONS FOR ${req.session.Auth.id}`,
+                    response
+                );
+                res.render('messagesView', {
+                    onMessages: 'true',
+                    conversations: response,
+                    userid: req.params.userId,
+                });
+            });
     },
     create: (req, res) => {
         const userInformation = {
             firstuserid: req.session.Auth.id,
+            // name: `${req.session.UserInfo.firstname} ${req.session.UserInfo.lastname}`,
             seconduserid: req.params.userId,
         };
         const form = { ...req.body };

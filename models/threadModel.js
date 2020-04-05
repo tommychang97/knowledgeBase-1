@@ -18,7 +18,7 @@ const addThread = thread => {
     console.log("addthread");
   return new Promise((resolve, reject) => {
       pg.query(
-        `INSERT INTO threads (userid,title,body,date,subject) VALUES ('${thread.userid}', '${thread.title}','${thread.body}','now()', '${thread.subject}')`
+        `INSERT INTO threads (userid,title,body,date,subject) VALUES (${thread.userid}, $$${thread.title}$$,$$${thread.body}$$,'now()', $$${thread.subject}$$)`
       ).then((res, err) => {
           if (err) {
               reject(err);
@@ -32,7 +32,7 @@ const getThreadsBySubject = searchResult => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM threads WHERE subject = '${searchResult.subject}' ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE subject = '${searchResult.subject}' ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -41,7 +41,6 @@ const getThreadsBySubject = searchResult => {
         });
     });
 };
-
 const getThreadsByTitle = searchResult => {
     var offset = searchResult.page * 10;
     return new Promise((resolve, reject) => {
@@ -60,7 +59,7 @@ const getThreadsFromUser = user => {
     var offset = user.page * 10;
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE users.userid = ${user.id} ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
+            `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE threads.userid = ${user.id} ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -71,9 +70,9 @@ const getThreadsFromUser = user => {
 }
 
 module.exports = {
-    getThreads: getThreads,
-    addThread: addThread,
-    getThreadsBySubject:getThreadsBySubject,
-    getThreadsByTitle:getThreadsByTitle,
-    getThreadsFromUser:getThreadsFromUser,
-  };
+  getThreads: getThreads,
+  addThread: addThread,
+  getThreadsBySubject:getThreadsBySubject,
+  getThreadsByTitle:getThreadsByTitle,
+  getThreadsFromUser:getThreadsFromUser,
+};

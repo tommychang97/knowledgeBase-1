@@ -2,7 +2,7 @@
     <textarea id="write_message" name="msg_content" placeholder="Write a message ...." onkeyup="canSend()"></textarea>
 </div>
 <div class="div_send_message">
-    <form action="/home/user/{{userid}}/conversations/create" method="POST">
+    <form action="/home/user/{{userid}}/conversations/{{conversationid}}/message" method="POST">
         <button id="message_box_button">Send</button>
     </form>
 </div>
