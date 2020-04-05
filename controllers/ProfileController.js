@@ -50,6 +50,7 @@ const profileControls = {
         userModel
             .editProfile(form)
             .then((result) => {
+                console.log(result);
                 res.redirect('/home');
             })
             .catch((err) => {

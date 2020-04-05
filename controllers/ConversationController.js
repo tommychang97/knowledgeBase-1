@@ -32,27 +32,28 @@ const conControls = {
                     });
                 }
                 if (req.params.conversationId) {
-                    console.log(
-                        'SPECIFIC CONVERSATION FETCHED',
-                        req.params.conversationId
-                    );
+                    // console.log(
+                    //     'SPECIFIC CONVERSATION FETCHED',
+                    //     req.params.conversationId
+                    // );
                     messageModel
                         .getMessages({ id: req.params.conversationId })
                         .then((messages) => {
                             if (messages.length) {
                                 messages.forEach((message) => {
+                                    console.log(message);
                                     message.conversationDate = momentUtil.formatMonthDate(
-                                        message.conversationdate
+                                        message.date
                                     );
                                     message.conversationTimeStamp = momentUtil.formatTimeStamp(
-                                        message.conversationdate
+                                        message.date
                                     );
                                 });
                             }
-                            console.log(
-                                `CONVERSATIONS FOR ${req.params.conversationId}`,
-                                messages
-                            );
+                            // console.log(
+                            //     `CONVERSATIONS FOR ${req.params.conversationId}`,
+                            //     messages
+                            // );
                             return res.render('messagesView', {
                                 onMessages: 'true',
                                 conversations: response,
@@ -61,10 +62,10 @@ const conControls = {
                             });
                         });
                 } else {
-                    console.log(
-                        `CONVERSATIONS FOR ${req.session.Auth.id}`,
-                        response
-                    );
+                    // console.log(
+                    //     `CONVERSATIONS FOR ${req.session.Auth.id}`,
+                    //     response
+                    // );
                     res.render('messagesView', {
                         onMessages: 'true',
                         conversations: response,
@@ -106,7 +107,7 @@ const conControls = {
         messageModel.createMessage(message).then((response) => {
             console.log('created message', response);
             res.redirect(
-                `/home/user/${req.session.Auth.id}/conversations/${conversationid}`
+                `/home/user/${req.session.Auth.id}/conversations/${req.params.conversationId}`
             );
         });
     },

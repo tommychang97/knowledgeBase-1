@@ -23,6 +23,7 @@ const threadControls = {
             .getThreadsFromUser({ id: req.params.userId, page: 0 })
             .then((response) => {
                 console.log(response);
+                console.log('req.session.UserInfo', req.session.UserInfo);
                 if (response.length) {
                     response.forEach((discussion) => {
                         discussion.date = momentUtil.formatDateMonthYear(

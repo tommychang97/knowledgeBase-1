@@ -16,9 +16,6 @@ window.onload = function () {
             divUserImg.classList.add("reply_img");
             let userImg = document.createElement("img");
             // placeholder
-            userImg.src = "https://randomuser.me/api/portraits/women/48.jpg";
-            userImg.alt = "";
-            divUserImg.appendChild(userImg);
 
             let divReplyBody = document.createElement("div");
             divReplyBody.classList.add("reply_body");

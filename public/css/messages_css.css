@@ -156,8 +156,12 @@
     height: 150px;
 }
 
+<<<<<<< HEAD
 .div_write_message {
     background-color: black;
+=======
+.div_write_message{
+>>>>>>> ebd166021567e8edd3e41b5b9d9d042defc9dd67
     height: 100px;
 }
 

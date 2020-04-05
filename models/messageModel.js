@@ -3,7 +3,7 @@ let pg = require("../util/postgres");
 const getMessages = conversation => {
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM messages INNER JOIN users ON messages.senderid = users.userid OR messages.receiverid = users.userid WHERE conversationid = ${conversation.id} ORDER BY messages.date DESC;`
+            `SELECT * FROM messages INNER JOIN users ON messages.senderid = users.userid OR messages.receiverid = users.userid WHERE conversationid = ${conversation.id} ORDER BY messages.date ASC;`
         ).then((res, err) => {
             if (err) {
                 reject(err);
@@ -12,7 +12,6 @@ const getMessages = conversation => {
         });
     });
 };
-
 const createMessage = message => {
     return new Promise((resolve, reject) => {
         pg.query(
