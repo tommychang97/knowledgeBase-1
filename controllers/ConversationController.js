@@ -5,6 +5,7 @@ const messageModel = require('../models/messageModel');
 const userModel = require('../models/userModel');
 
 const momentUtil = require('../util/moment');
+const mailer = require('../util/mailer');
 
 const conControls = {
     getForm: (req, res) => {
@@ -24,6 +25,8 @@ const conControls = {
         convoModel
             .getConversations({ id: req.session.Auth.id })
             .then((response) => {
+                console.log(`getConversations`, response);
+
                 if (response.length) {
                     response.forEach((conversation) => {
                         conversation.conversationdate = momentUtil.formatMonthDate(
@@ -32,16 +35,15 @@ const conControls = {
                     });
                 }
                 if (req.params.conversationId) {
-                    // console.log(
-                    //     'SPECIFIC CONVERSATION FETCHED',
-                    //     req.params.conversationId
-                    // );
+                    console.log(
+                        'SPECIFIC CONVERSATION FETCHED',
+                        req.params.conversationId
+                    );
                     messageModel
                         .getMessages({ id: req.params.conversationId })
                         .then((messages) => {
                             if (messages.length) {
                                 messages.forEach((message) => {
-                                    console.log(message);
                                     message.conversationDate = momentUtil.formatMonthDate(
                                         message.date
                                     );
@@ -50,10 +52,10 @@ const conControls = {
                                     );
                                 });
                             }
-                            // console.log(
-                            //     `CONVERSATIONS FOR ${req.params.conversationId}`,
-                            //     messages
-                            // );
+                            console.log(
+                                `messages FOR ${req.params.conversationId}`,
+                                messages
+                            );
                             return res.render('messagesView', {
                                 onMessages: 'true',
                                 conversations: response,
@@ -92,6 +94,21 @@ const conControls = {
                 if (err) {
                     console.log('Failed to create message', err);
                 }
+                const userIdToSendTo =
+                    message.senderid === req.session.Auth.id
+                        ? message.receiverid
+                        : message.senderid;
+                console.log(
+                    `WHAT ARE THE IDS? MINE: ${req.session.Auth.id} SENDING TO: ${userIdToSendTo}`
+                );
+                userModel.getUserPage(userIdToSendTo).then((user) => {
+                    console.log('USERINFO', user.userInfo.email);
+                    const from = req.session.UserInfo.email;
+                    const to = user.userInfo.email;
+                    const subject = `[KNOWLEDGEBASE] Message Notification from ${req.session.UserInfo.firstname} ${req.session.UserInfo.lastname}`;
+                    const text = message.body;
+                    mailer.sendMail(from, to, subject, text);
+                });
                 res.redirect(`/home/profile/${req.params.userId}`);
             });
         });
@@ -103,9 +120,22 @@ const conControls = {
             receiverid: req.params.userId,
             ...req.body,
         };
-        console.log('message', message);
         messageModel.createMessage(message).then((response) => {
-            console.log('created message', response);
+            const userIdToSendTo =
+                message.senderid === req.session.Auth.id
+                    ? message.receiverid
+                    : message.senderid;
+            console.log(
+                `WHAT ARE THE IDS? MINE: ${req.session.Auth.id} SENDING TO: ${userIdToSendTo}`
+            );
+            userModel.getUserPage(userIdToSendTo).then((user) => {
+                console.log('USERINFO', user.userInfo.email);
+                const from = req.session.UserInfo.email;
+                const to = user.userInfo.email;
+                const subject = `[KNOWLEDGEBASE] Message Notification from ${req.session.UserInfo.firstname} ${req.session.UserInfo.lastname}`;
+                const text = message.body;
+                mailer.sendMail(from, to, subject, text);
+            });
             res.redirect(
                 `/home/user/${req.session.Auth.id}/conversations/${req.params.conversationId}`
             );

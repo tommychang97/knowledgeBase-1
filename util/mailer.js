@@ -5,28 +5,41 @@ const mailer = require('nodemailer');
 const testAccount = mailer.createTestAccount();
 
 let transporter = mailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure: false,
+    // port: 25,
+    // host: 'localhost',
+    // tls: {
+    //   rejectUnauthorized: false
+    // },
+    service: 'gmail',
     auth: {
-        user: testAccount.user, // generated ethereal user
-        pass: testAccount.pass, // generated ethereal password
+        user: 'test.michaelmhyu@gmail.com',
+        pass: 'Tester123!',
     },
+    tls: {
+        rejectUnauthorized: false,
+    },
+    logger: true,
+    debug: true,
 });
 
 const nodemailer = {
     sendMail: (from, to, subject, text, html) => {
-        transporter
-            .sendMail({
+        transporter.sendMail(
+            {
                 from,
                 to,
                 subject,
                 text,
-                html: `<div>${text}</div>`,
-            })
-            .then((res) => {
-                console.log('Sent mail was: ', res);
-            });
+                html: `<h2>Message from: ${from}</h2><div>${text}</div>`,
+            },
+            (error, info) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(info);
+                }
+            }
+        );
     },
 };
 

@@ -4,6 +4,7 @@ const threadModel = require('../models/threadModel');
 const userModel = require('../models/userModel');
 
 const momentUtil = require('../util/moment');
+const mailer = require('../util/mailer');
 
 const threadControls = {
     createThread: (req, res) => {

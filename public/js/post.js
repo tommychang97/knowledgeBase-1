@@ -5,6 +5,7 @@ window.onload = function () {
         const divPost = this.parentElement.parentElement.parentElement;
         const divRepliesToPost = divPost.childNodes[5];
         const divReplyBox = divPost.childNodes[7];
+        console.log("divreplybox threadid", divReplyBox.getAttribute('data-threadid'));
         console.log(divRepliesToPost.childNodes.length);
         const numReplies = divRepliesToPost.childNodes.length;
         if (numReplies < 1) {

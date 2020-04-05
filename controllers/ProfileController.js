@@ -6,7 +6,6 @@ const momentUtil = require('../util/moment');
 const profileControls = {
     get: (req, res) => {
         const userId = req.params.userId;
-        console.log('userID', userId);
         userModel
             .getUserPage(userId)
             .then((response) => {
@@ -40,13 +39,11 @@ const profileControls = {
                 },
                 posts: response.userThreads,
             };
-            console.log(userProfile);
             res.render('editProfileView', userProfile);
         });
     },
     edit: (req, res) => {
         const form = { id: req.session.Auth.id, ...req.body };
-        console.table(form);
         userModel
             .editProfile(form)
             .then((result) => {
