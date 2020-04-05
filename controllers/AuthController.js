@@ -5,6 +5,8 @@ const passport = require('../util/passport');
 const userModel = require('../models/userModel');
 const threadModel = require('../models/threadModel');
 
+const momentUtil = require('../util/moment');
+
 const saltRounds = 10;
 
 const authControls = {
@@ -15,6 +17,13 @@ const authControls = {
             console.log(userInfo);
             threadModel.getThreads(0).then((response) => {
                 console.log(response);
+                if (response.length) {
+                    response.forEach((discussion) => {
+                        discussion.date = momentUtil.formatDateMonthYear(
+                            discussion.date
+                        );
+                    });
+                }
                 res.render('home_page', {
                     onHome: true,
                     user: userInfo,

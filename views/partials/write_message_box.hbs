@@ -1,14 +1,10 @@
-<div class="div_write_message">
-    <textarea 
-        id="write_message" 
-        name="msg_content" 
-        placeholder="Write a message ...."
-    ></textarea>
-</div>
-<div class="div_send_message">
-    <form action="/home/user/{{userid}}/conversations/{{conversationid}}/message" method="POST">
+<form action="/home/user/{{userid}}/conversations/{{conversations.[0].conversationid}}/message" method="POST">
+    <div class="div_write_message">
+        <textarea id="write_message" name="body" placeholder="Write a message ...."></textarea>
+    </div>
+    <div class="div_send_message">
         <button id="message_box_button">Send</button>
-    </form>
-</div>
+    </div>
+</form>
 
 <script type="text/javascript" src="/js/write_message_box.js"></script>

@@ -3,6 +3,8 @@
 const threadModel = require('../models/threadModel');
 const userModel = require('../models/userModel');
 
+const momentUtil = require('../util/moment');
+
 const threadControls = {
     createThread: (req, res) => {
         const form = {
@@ -21,10 +23,17 @@ const threadControls = {
             .getThreadsFromUser({ id: req.params.userId, page: 0 })
             .then((response) => {
                 console.log(response);
-                req.session.UserInfo.messages = response[0].messages;
-                req.session.UserInfo.posts = response[0].posts;
-                req.session.UserInfo.likes = response[0].likes;
-                res.render('home_page', {
+                if (response.length) {
+                    response.forEach((discussion) => {
+                        discussion.date = momentUtil.formatDateMonthYear(
+                            discussion.date
+                        );
+                    });
+                    req.session.UserInfo.messages = response[0].messages;
+                    req.session.UserInfo.posts = response[0].posts;
+                    req.session.UserInfo.likes = response[0].likes;
+                }
+                res.render('allPostsView', {
                     onHome: true,
                     user: { ...req.session.UserInfo, id: req.session.Auth.id },
                     posts: response,
@@ -36,7 +45,14 @@ const threadControls = {
             threadModel
                 .getThreadsByTitle({ title: req.query.searchValue, page: 0 })
                 .then((response) => {
-                    console.log("getThreadsByTitle ONE: ", response);
+                    if (response.length) {
+                        response.forEach((discussion) => {
+                            discussion.date = momentUtil.formatDateMonthYear(
+                                discussion.date
+                            );
+                        });
+                    }
+                    console.log('getThreadsByTitle ONE: ', response);
                     const results = { onHome: true, posts: response };
                     res.render('searchView', results);
                 });
@@ -44,7 +60,14 @@ const threadControls = {
             threadModel
                 .getThreadsBySubject({ subject: req.query.subject, page: 0 })
                 .then((response) => {
-                    console.log("getThreadsBySubject ALL", response);
+                    if (response.length) {
+                        response.forEach((discussion) => {
+                            discussion.date = momentUtil.formatDateMonthYear(
+                                discussion.date
+                            );
+                        });
+                    }
+                    console.log('getThreadsBySubject ALL', response);
                     const results = { onHome: true, posts: response };
                     res.render('searchView', results);
                 });

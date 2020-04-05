@@ -1,6 +1,7 @@
 'use strict';
 
 const userModel = require('../models/userModel');
+const momentUtil = require('../util/moment');
 
 const profileControls = {
     get: (req, res) => {
@@ -9,6 +10,13 @@ const profileControls = {
         userModel
             .getUserPage(userId)
             .then((response) => {
+                if (response.userThreads.length) {
+                    response.userThreads.forEach((discussion) => {
+                        discussion.date = momentUtil.formatDateMonthYear(
+                            discussion.date
+                        );
+                    });
+                }
                 const userProfile = {
                     onProfile: true,
                     user: response.userInfo,
@@ -21,37 +29,33 @@ const profileControls = {
                 console.log(err);
             });
     },
-    getPosts: (req, res) => {
-        const userId = req.params.userId;
-        //db.getMessages
-
-        const results = { onHome: true};
-        res.render('allPostsView', results)
-    },
-    editProfile: (req, res) => {
-        const results = { onHome: true};
-        res.render('editProfileView', results)
+    getEdit: (req, res) => {
+        userModel.getUserPage(req.session.Auth.id).then((response) => {
+            const userProfile = {
+                onHome: true,
+                user: {
+                    image: response.userInfo.imageurl,
+                    id: response.userInfo.userid,
+                    ...response.userInfo,
+                },
+                posts: response.userThreads,
+            };
+            console.log(userProfile);
+            res.render('editProfileView', userProfile);
+        });
     },
     edit: (req, res) => {
-        const {
-            firstname,
-            lastname,
-            description,
-            imageurl = { imageUrl },
-            country,
-            birthdate,
-        } = req.body;
-        const form = {
-            firstname,
-            lastname,
-            description,
-            imageurl,
-            country,
-            birthdate,
-        };
-        userModel.editProfile(form).then((result) => {
-            res.redirect('home');
-        });
+        const form = { id: req.session.Auth.id, ...req.body };
+        console.table(form);
+        userModel
+            .editProfile(form)
+            .then((result) => {
+                res.redirect('/home');
+            })
+            .catch((err) => {
+                console.log('failed to update user', err);
+                res.redirect('/home');
+            });
         // db.updateUser({name, imageUrl, country, birthdate});
     },
     sendLike: (req, res) => {

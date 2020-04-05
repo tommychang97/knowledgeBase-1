@@ -36,9 +36,7 @@ router.post('/register', authController.register);
 /** Profile  */
 router.get('/home/profile/:userId', profileController.get);
 
-router.get('/home/user/:userId/posts', profileController.getPosts);
-
-router.get('/home/user/:userId/edit', profileController.editProfile);
+router.get('/home/user/:userId/edit', profileController.getEdit);
 
 router.post('/home/user/:userId/edit', profileController.edit);
 
@@ -51,7 +49,10 @@ router.post('/createThread', threadController.createThread);
 
 router.get('/home/search', threadController.search);
 
-router.get('/home/user/:userId/threads/:threadId?/:search?', threadController.get);
+router.get(
+    '/home/user/:userId/threads/:threadId?/:search?',
+    threadController.get
+);
 
 // router.post(
 //     '/home/user/:userId/threads/:postId/comment',
@@ -68,25 +69,26 @@ router.post(
     postController.sendComment
 );
 
-
-
-
-
-
-
 /** Messages  */
 
 router.get('/home/user/:userId/messages/:msgId?', msgController.get);
 
 router.post('/home/user/:userId/messages/send', msgController.sendMessage);
 
-
 /** Conversations  */
 
 router.get('/home/user/:userId/conversations/create', convoController.getForm);
 
-router.get('/home/user/:userId/conversations/:conversationId?', convoController.getConversations);
+router.get(
+    '/home/user/:userId/conversations/:conversationId?',
+    convoController.getConversations
+);
 
 router.post('/home/user/:userId/conversations/create', convoController.create);
+
+router.post(
+    '/home/user/:userId/conversations/:conversationId/message',
+    convoController.createMessage
+);
 
 module.exports = router;

@@ -99,8 +99,7 @@ const editProfile = (user) => {
     return new Promise((resolve, reject) => {
         pg.query(
             `UPDATE users SET firstname = $$${user.firstname}$$, lastname = $$${user.lastname}$$, imageurl = $$${user.imageurl}$$, country = $$${user.country}$$
-            , dob = ${user.birthdate}, description = $$${user.about}$$ 
-             WHERE userid = ${user.id}`
+            , dob = '${user.birthdate}', description = $$${user.description}$$`
         ).then((res, err) => {
             if (err) {
                 reject(err);
