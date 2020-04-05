@@ -52,7 +52,7 @@ CREATE TABLE conversations (
     receiverid integer NOT NULL,
     topic varchar(250),
     conversationdate date,
-    CONSTRAINT convo_pk PRIMARY KEY (conversationid, senderid, receiverid)
+    CONSTRAINT convo_pk PRIMARY KEY (conversationid)
 );
 
 
@@ -64,6 +64,6 @@ CREATE TABLE messages (
     body varchar(1000) NOT NULL,
 	date date NOT NULL,
     CONSTRAINT message_pk PRIMARY KEY (messageid, conversationid),
-	CONSTRAINT convoid_fk FOREIGN KEY (conversationid,senderid,receiverid) REFERENCES conversations(conversationid,senderid,receiverid)
+    CONSTRAINT convo_fk FOREIGN KEY (conversationid) REFERENCES conversations(conversationid)
 );
     
