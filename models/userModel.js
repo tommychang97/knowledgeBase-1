@@ -46,11 +46,11 @@ const signUp = registerInfo => {
     return new Promise((resolve, reject) => {
         if (registerInfo.birthdate == "") {
             var query = `INSERT INTO users (firstname,lastname,password,email,imageurl,description,dob,country) VALUES 
-            ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.about}$$,null,$$${registerInfo.country}$$)`
+            ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.description}$$,null,$$${registerInfo.country}$$)`
         }
         else {
             var query = `INSERT INTO users (firstname,lastname,password,email,imageurl,description,dob,country) VALUES 
-            ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.about}$$,'${registerInfo.birthdate}',$$${registerInfo.country}$$)`
+            ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.description}$$,'${registerInfo.birthdate}',$$${registerInfo.country}$$)`
         }
         pg.query(
            query
@@ -96,12 +96,19 @@ const createUserSession = user => {
     });
 };
 
+
 const editProfile = user => {
     return new Promise((resolve, reject) => {
+        if (user.birthdate == "") {
+            var query = `UPDATE users SET firstname = $$${user.firstname}$$, lastname = $$${user.lastname}$$, imageurl = $$${user.imageurl}$$, country = $$${user.country}$$
+            , dob = null, description = $$${user.description}$$ WHERE userid = ${user.id}`
+        }
+        else {
+            var query = `UPDATE users SET firstname = $$${user.firstname}$$, lastname = $$${user.lastname}$$, imageurl = $$${user.imageurl}$$, country = $$${user.country}$$
+            , dob = '${user.birthdate}', description = $$${user.description}$$ WHERE userid = ${user.id}`
+        }
         pg.query(
-            `UPDATE users SET firstname = $$${user.firstname}$$, lastname = $$${user.lastname}$$, imageurl = $$${user.imageurl}$$, country = $$${user.country}$$
-            , dob = ${user.birthdate}, description = $$${user.about}$$ 
-             WHERE userid = ${user.id}`
+           query
         ).then((res, err) => {
             if (err) {
                 reject(err);
