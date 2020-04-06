@@ -1,12 +1,13 @@
 <div id="div_left">
     <div id="div_message_list">
+        {{#each conversations}}
         {{>message_list_item}}
-        {{>message_list_item}}
+        {{/each}}
     </div>
 </div>
 
 <div id="div_right">
     <div id="div_message_box">
-        {{>message_box}}
+        {{>message_box this}}
     </div>
 </div>

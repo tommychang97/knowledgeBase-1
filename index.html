@@ -1,115 +1,128 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./public/css/common_css.css" />
-    <link rel="stylesheet" href="./public/css/login_css.css" />
-    <link rel="stylesheet" href="./public/css/home_css.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <a id="nav_logo" href="/">k<span class="logo_base_colour">b</span></a>
-        <input id="nav_search" type="text" placeholder="🔍 Search" />
-        <button id="nav_btn_logout" class="btn_format">logout</button>
-      </nav>
-    </header>
+        <link rel="stylesheet" href="./public/css/common_css.css" />
+        <link rel="stylesheet" href="./public/css/login_css.css" />
+        <link rel="stylesheet" href="./public/css/home_css.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a id="nav_logo" href="/"
+                    >k<span class="logo_base_colour">b</span></a
+                >
+                <input id="nav_search" type="text" placeholder="🔍 Search" />
+                <button id="nav_btn_logout" class="btn_format">logout</button>
+            </nav>
+        </header>
 
-    <div id="container">
-      <div id="div_left">
-        <div id="div_profile_sum">
-          <div id="img_profile">
-            <img
-              src="https://randomuser.me/api/portraits/med/men/1.jpg"
-              alt="user"
-            />
-          </div>
-
-          <h2>Name</h2>
-          <p>Desciption</p>
-        </div>
-
-        <div id="div_links">
-          <p>
-            <a class="profile_links" href="">Post</a>
-            <span class="profile_link_size">#</span>
-          </p>
-          <p>
-            <a class="profile_links" href="">Messages</a>
-            <span class="profile_link_size">#</span>
-          </p>
-          <p>
-            <a class="profile_links" href="">Likes</a>
-            <span class="profile_link_size">#</span>
-          </p>
-          <br />
-          <p><a class="profile_links" href="">Edit Profile</a></p>
-        </div>
-      </div>
-
-      <div id="div_right">
-        <div id="div_make_post">
-            <h1>whats your question today?</h1>
-            <input class="input_format" type="text" placeholder="subject" />
-            <br />
-            <textarea
-                name=""
-                id="post_detail"
-                cols="30"
-                rows="10"
-                placeholder="explain in detail ...."
-            ></textarea>
-            <br />
-            <select name="" class="select_drop" id="post_select">
-                <option value="topic">Topic</option>
-            </select>
-
-            <button id="btn_post">post to timeline</button>
-
-        </div>
-
-        <div id="div_search_topic">
-            <h3>Search by topic</h3>
-            <select name="" class="select_drop" id="topic_select" >
-                <option value="php">php</option>
-            </select>
-            <button id="btn_topic_search" class="btn_format">go -></button>
-        </div>
-
-        <div id="div_discussion">
-            <h2>Latest discussions</h2>
-
-            <div class="div_post">
-                <div class="user_img">
-                    <img src="https://randomuser.me/api/portraits/med/men/5.jpg" alt="">
-                </div>            
-
-                <div class="post_body">
-
-                    <div class="post_head">
-                        <h3>Title</h3>
-                        <button class="btn_format_white btn_topic" >topic</button>
+        <div id="container">
+            <div id="div_left">
+                <div id="div_profile_sum">
+                    <div id="img_profile">
+                        <a href="/home/profile">
+                            <img
+                                src="https://randomuser.me/api/portraits/med/men/1.jpg"
+                                alt="user"
+                            />
+                        </a>
                     </div>
 
-                    <div class="post_text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Sed sit amet ultrices risus, at tempor lectus. Sed mollis 
-                        massa ut suscipit posuere. Aenean laoreet euismod erat, 
-                        et tincidunt odio suscipit sit amet. 
-                    </div>
-    
-                    <div class="post_info">
-                        <p>Date</p>
-                        <a href=""># replies</a>
+                    <h2>Name</h2>
+                    <p>Desciption</p>
+                </div>
+
+                <div id="div_links">
+                    <p>
+                        <a class="profile_links" href="">Post</a>
+                        <span class="profile_link_size">#</span>
+                    </p>
+                    <p>
+                        <a class="profile_links" href="">Messages</a>
+                        <span class="profile_link_size">#</span>
+                    </p>
+                    <p>
+                        <a class="profile_links" href="">Likes</a>
+                        <span class="profile_link_size">#</span>
+                    </p>
+                    <br />
+                    <p><a class="profile_links" href="">Edit Profile</a></p>
+                </div>
+            </div>
+
+            <div id="div_right">
+                <div id="div_make_post">
+                    <h1>whats your question today?</h1>
+                    <input
+                        class="input_format"
+                        type="text"
+                        placeholder="subject"
+                    />
+                    <br />
+                    <textarea
+                        name=""
+                        id="post_detail"
+                        cols="30"
+                        rows="10"
+                        placeholder="explain in detail ...."
+                    ></textarea>
+                    <br />
+                    <select name="" class="select_drop" id="post_select">
+                        <option value="topic">Topic</option>
+                    </select>
+
+                    <button id="btn_post">post to timeline</button>
+                </div>
+
+                <div id="div_search_topic">
+                    <h3>Search by topic</h3>
+                    <select name="" class="select_drop" id="topic_select">
+                        <option value="php">php</option>
+                    </select>
+                    <button id="btn_topic_search" class="btn_format">
+                        go ->
+                    </button>
+                </div>
+
+                <div id="div_discussion">
+                    <h2>Latest discussions</h2>
+
+                    <div class="div_post">
+                        <div class="user_img">
+                            <img
+                                src="https://randomuser.me/api/portraits/med/men/5.jpg"
+                                alt=""
+                            />
+                        </div>
+
+                        <div class="post_body">
+                            <div class="post_head">
+                                <h3>Title</h3>
+                                <button class="btn_format_white btn_topic">
+                                    topic
+                                </button>
+                            </div>
+
+                            <div class="post_text">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Sed sit amet ultrices risus, at
+                                tempor lectus. Sed mollis massa ut suscipit
+                                posuere. Aenean laoreet euismod erat, et
+                                tincidunt odio suscipit sit amet.
+                            </div>
+
+                            <div class="post_info">
+                                <p>Date</p>
+                                <a href=""># replies</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-               
             </div>
         </div>
-      </div>
-    </div>
-  </body>
-</html>
+    </body>
+</html> -->

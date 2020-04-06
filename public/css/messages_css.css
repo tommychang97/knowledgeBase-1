@@ -1,19 +1,19 @@
 /* Left side of page ----------------------------------------------------------------------*/
 
-#div_left{
+#div_left {
     float: left;
     height: 600px;
     width: 30%;
 }
 
-#div_message_list{
+#div_message_list {
     width: 95%;
     border-right: solid 1px #e6e8eca2;
     height: 600px;
     padding-bottom: 10px;
 }
 
-.div_message_list_item{
+.div_message_list_item {
     height: 80px;
     padding-top: 10px;
     border-right: solid 1px #e6e8eca2;
@@ -24,46 +24,47 @@
     background-color: rgb(239, 244, 248);
 }
 
-.desc_list_item{
+.desc_list_item {
+    height: 80px;
     width: 74%;
     float: right;
 }
 
-.user_img_list_item{
+.user_img_list_item {
     width: 18%;
     float: left;
     margin: 10px;
 }
 
-.user_img_list_item img{
+.user_img_list_item img {
     width: 100%;
     height: auto;
     border-radius: 50%;
 }
 
-.message_from{
-    float:left;
+.message_from {
+    float: left;
     font-size: 13pt;
-    width:50%;
+    width: 50%;
     margin-top: 9px;
 }
 
-.message_date{
-    float:right;
-    width:25%;
+.message_date {
+    float: right;
+    width: 25%;
     margin-top: 8px;
 }
-.message_subject{
-    float:left;
+.message_subject {
+    float: left;
     font-size: 11pt;
-    width:70%;
+    width: 70%;
     margin-top: 4px;
     color: #595b5c;
 }
 
 /* Right side of page ----------------------------------------------------------------------*/
 
-#div_right{
+#div_right {
     float: left;
     height: 600px;
     width: 69%;
@@ -71,63 +72,64 @@
     padding-bottom: 10px;
 }
 
-.div_message_box_item{
+.div_message_box_item {
     margin-top: 10px;
     height: 100px;
     width: 100%;
 }
 
-.div_message_box_container{
+.div_message_box_container {
     height: 450px;
+    max-height: inherit;
 }
 
-.message_img{
+.message_img {
     width: 6%;
     float: left;
     margin: 10px;
 }
 
-.message_img img{
+.message_img img {
     width: 100%;
     height: auto;
     border-radius: 50%;
 }
 
-.message_box_from_header{
-    float:left;
+.message_box_from_header {
+    float: left;
     font-size: 12pt;
-    width:50%;
+    width: 50%;
     margin-top: 9px;
     display: flex;
 }
 
-.message_box_from{
-    float:left;
+.message_box_from {
+    float: left;
     font-size: 12pt;
     margin-top: 9px;
 }
 
-.message_box_time{
-    float:left;
+.message_box_time {
+    float: left;
     font-size: 11pt;
     margin-top: 9px;
     color: #6c6d6e8c;
 }
 
-.message_desc{
+.message_desc {
     width: 90%;
     float: right;
 }
 
-.message_box_subject{
+.message_box_subject {
     font-size: 11pt;
     color: #595b5c;
-    float:left;
-    width:100%;
+    float: left;
+    width: 100%;
     margin-top: 4px;
 }
 
-.date_divider1{
+.date_divider1 {
     width: 40%;
     float: left;
     height: 20px;
@@ -135,7 +137,7 @@
     border-top: solid 1px #e6e8eca2;
 }
 
-.date_divider2{
+.date_divider2 {
     width: 40%;
     float: left;
     height: 20px;
@@ -143,28 +145,27 @@
     border-top: solid 1px #e6e8eca2;
 }
 
-.date_message_box{
-    width:20%;
-    float:left;
+.date_message_box {
+    width: 20%;
+    float: left;
     text-align: center;
     color: #9197a5a2;
 }
 
-.div_write_message_container{
+.div_write_message_container {
     height: 150px;
 }
 
 .div_write_message{
-    background-color: black;
     height: 100px;
 }
 
-.div_send_message{
+.div_send_message {
     background-color: rgb(239, 244, 248);
     height: 50px;
 }
 
-#write_message{
+#write_message {
     width: 97.2%;
     height: 76px;
     resize: none;
@@ -176,7 +177,7 @@
     padding: 10px;
 }
 
-#message_box_button{
+#message_box_button {
     margin-bottom: 10px;
     color: white;
     border: none;

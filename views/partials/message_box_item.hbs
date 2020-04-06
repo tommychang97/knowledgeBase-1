@@ -1,24 +1,28 @@
 <div class="div_message_box_item">
     <div class="date_divider1"></div>
-    <div class="date_message_box">SEP 18</div>
+    <div class="date_message_box">{{conversationDate}}</div>
     <div class="date_divider2"></div>
     <div class="message_img">
-        <img src="https://randomuser.me/api/portraits/med/men/5.jpg" alt="">
-    </div>  
+        <!-- <img src="https://randomuser.me/api/portraits/med/men/5.jpg" alt=""> -->
+        <img src={{imageurl}} />
+    </div>
     <div class="message_desc">
         <!-- todo: change these from placeholder strings to actual values -->
         <div class="message_box_from_header">
             <div class="message_box_from">
-                Darren James 
+                <!-- Darren James  -->
+                {{firstname}} {{lastname}}
             </div>
 
             <div class="message_box_time">
-                · 9:57 PM
+                <!-- · 9:57 PM -->
+                · {{conversationTimeStamp}}
             </div>
         </div>
 
         <div class="message_box_subject">
-            Welcome to knowledge base. We're excited to have you join the community!
+            <!--Welcome to knowledge base. We're excited to have you join the community! -->
+            {{body}}
         </div>
     </div>
 </div>
