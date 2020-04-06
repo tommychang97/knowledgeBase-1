@@ -29,7 +29,7 @@ const addThread = (thread) => {
 };
 
 const getThreadsBySubject = (searchResult) => {
-    const offset = searchResult.page * 10;
+    const offset = searchResult.page * 5;
     return new Promise((resolve, reject) => {
         pg.query(
             `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE subject = '${searchResult.subject}' ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
@@ -42,7 +42,7 @@ const getThreadsBySubject = (searchResult) => {
     });
 };
 const getThreadsByTitle = (searchResult) => {
-    const offset = searchResult.page * 10;
+    const offset = searchResult.page * 5;
     return new Promise((resolve, reject) => {
         pg.query(
             `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE title
@@ -70,7 +70,7 @@ const getThreadById = (id) => {
 };
 
 const getThreadsFromUser = (user) => {
-    const offset = user.page * 10;
+    const offset = user.page * 5;
     return new Promise((resolve, reject) => {
         pg.query(
             `SELECT * FROM threads INNER JOIN users ON threads.userid = users.userid WHERE threads.userid = ${user.id} ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY;`
