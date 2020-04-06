@@ -22,12 +22,14 @@ const authControls = {
         updateUserDetails(req.session.UserInfo.email).then((userInfo) => {
             req.session.UserInfo = userInfo;
             userInfo.id = req.session.Auth.id;
-            threadModel.getThreads(0).then((response) => {
+            const page = req.params.page > 0 ? req.params.page : 0;
+            console.log('THIS IS THE APGE', page);
+            threadModel.getThreads(page).then((response) => {
                 if (response.length) {
                     const populatedDiscussions = response.map((discussion) => {
                         discussion.date = momentUtil.formatDateMonthYear(discussion.date);
                         return postModel
-                            .getPosts({ id: discussion.threadid, page: 0 })
+                            .getPosts({ id: discussion.threadid, page })
                             .then((posts) => {
                                 console.log(`POSTS FOR THREAD ${discussion.threadid}`, posts);
                                 discussion.replies = posts;
@@ -35,12 +37,19 @@ const authControls = {
                             });
                     });
                     Promise.all(populatedDiscussions).then((discussions) => {
-                        console.log('get threads home', discussions);
+                        console.log('get threads home', discussions, page);
                         res.render('home_page', {
                             onHome: true,
                             user: userInfo,
                             discussions,
+                            page,
                         });
+                    });
+                } else {
+                    res.render('home_page', {
+                        onHome: true,
+                        user: userInfo,
+                        page,
                     });
                 }
             });

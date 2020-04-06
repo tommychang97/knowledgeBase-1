@@ -2,7 +2,7 @@ let pg = require('../util/postgres');
 
 const getThreads = (page) => {
     return new Promise((resolve, reject) => {
-        const offset = page * 10;
+        const offset = page * 5;
         pg.query(
             `SELECT * FROM threads INNER JOIN users on threads.userid = users.userid ORDER BY threadid DESC OFFSET ${offset} ROWS FETCH NEXT 5 ROWS ONLY`
         ).then((res, err) => {

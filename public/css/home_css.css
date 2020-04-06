@@ -266,3 +266,22 @@ textarea {
     border: none;
     cursor: pointer;
 }
+
+.nav-buttons {
+    border: solid 2px var(--base-color);
+    color: var(--base-color);
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 1em;
+    margin-top: 25px;
+    margin-bottom: 100px;
+}
+
+.nav-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.nav-buttons-container a {
+    text-decoration: none;
+}

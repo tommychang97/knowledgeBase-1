@@ -1,6 +1,20 @@
 <div id="div_discussion">
     <h2>Latest discussions</h2>
     {{#each discussions}}
-    {{>post}}
+        {{>post}}
     {{/each}}
+    <div class="nav-buttons-container">
+        {{#if page}}
+            <div>
+                <a href="/home/{{dec page}}">
+                    <div class="nav-buttons"><< Previous</div>
+                </a>
+            </div>
+        {{/if}}
+        <div>
+            <a href="/home/{{inc page}}">
+                <div class="nav-buttons">Next >></div>
+            </a>
+        </div>
+    </div>
 </div>

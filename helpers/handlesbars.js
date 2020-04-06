@@ -1,14 +1,12 @@
-var register = function(Handlebars) {
-    var helpers = {};
+var Handlebars = require('express-handlebars');
 
-    if (Handlebars && typeof Handlebars.registerHelper === 'function') {
-        for (var prop in helpers) {
-            Handlebars.registerHelper(prop, helpers[prop]);
-        }
-    } else {
-        return helpers;
-    }
+const helpers = {
+    inc: (value) => {
+        return parseInt(value, 10) + 1;
+    },
+    dec: (value) => {
+        return value ? parseInt(value, 10) - 1 : 0;
+    },
 };
 
-module.exports.register = register;
-module.exports.helpers = register(null);
+module.exports.helpers = helpers;

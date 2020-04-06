@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 /** Authentication  */
 router.post('/signup', authController.signup);
 
-router.get('/home', authController.home);
+router.get('/home/:page?', authController.home);
 
 router.post('/login', authController.login);
 
