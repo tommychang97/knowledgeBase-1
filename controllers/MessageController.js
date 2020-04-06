@@ -1,5 +1,3 @@
-'use strict';
-
 const mailer = require('../util/mailer');
 const userModel = require('../models/userModel');
 

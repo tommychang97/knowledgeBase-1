@@ -1,5 +1,3 @@
-'use strict';
-
 const userModel = require('../models/userModel');
 const momentUtil = require('../util/moment');
 
@@ -11,9 +9,7 @@ const profileControls = {
             .then((response) => {
                 if (response.userThreads.length) {
                     response.userThreads.forEach((discussion) => {
-                        discussion.date = momentUtil.formatDateMonthYear(
-                            discussion.date
-                        );
+                        discussion.date = momentUtil.formatDateMonthYear(discussion.date);
                     });
                 }
                 const userProfile = {
@@ -36,6 +32,7 @@ const profileControls = {
                     image: response.userInfo.imageurl,
                     id: response.userInfo.userid,
                     ...response.userInfo,
+                    name: `${response.userInfo.firstname} ${response.userInfo.lastname}`,
                 },
                 posts: response.userThreads,
             };
@@ -47,7 +44,7 @@ const profileControls = {
         userModel
             .editProfile(form)
             .then((result) => {
-                console.log(result);
+                console.log('UPDATE USER INFORMATION', result);
                 res.redirect('/home');
             })
             .catch((err) => {

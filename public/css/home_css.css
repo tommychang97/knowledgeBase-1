@@ -215,6 +215,7 @@ textarea {
 }
 
 .post_replies {
+    display: none;
     width: 90%;
     float: left;
 }

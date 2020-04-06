@@ -1,20 +1,20 @@
-'use strict';
-
 const postModel = require('../models/postModel');
 
 const post = {
     add: (req, res) => {
         const threadid = req.params.threadId;
-        console.log('parse input from form...', { ...req.body });
+        const postUserId = req.params.userId;
         const post = {
             threadid,
             id: req.session.Auth.id,
-            body: 'TEST STRING FROM SERVER',
+            ...req.body,
         };
-        console.log(post);
+        console.log(' ADDING THIS MESSAGE', post);
+        postModel.addPost(post).then((response) => {
+            console.log('post added', response);
+            res.redirect(`/home/view/${postUserId}/threads/${threadid}`);
+        });
     },
-    get: (req, res) => {},
-    sendComment: (req, res) => {},
 };
 
 module.exports = post;

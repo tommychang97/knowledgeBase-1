@@ -12,14 +12,13 @@
     float: left;
 }
 
-#div_user_profile_sum h3{
+#div_user_profile_sum h3 {
     font-size: 20pt;
 }
 
-#div_top_left{
+#div_top_left {
     width: 70%;
 }
-
 
 /* ----------------------------------------------- */
 #img_profile {
@@ -106,16 +105,16 @@ p {
     cursor: pointer;
 }
 
-.user_profile_link_size{
+.user_profile_link_size {
     color: rgb(15, 128, 177);
 }
 
-.user_profile_links{
+.user_profile_links {
     color: rgb(15, 128, 177);
     text-decoration: none;
 }
 
-.input_format{
+.input_format {
     margin-bottom: 20px;
 }
 
@@ -199,6 +198,7 @@ p {
 /* ----------------------------------------------- */
 
 .post_replies {
+    display: none;
     width: 90%;
     float: left;
 }
@@ -258,6 +258,6 @@ p {
     width: 100%;
 }
 
-#div_user_posts{
-    width:80%;
+#div_user_posts {
+    width: 80%;
 }

@@ -1,5 +1,3 @@
-'use strict';
-
 const convoModel = require('../models/conversationModel');
 const messageModel = require('../models/messageModel');
 const userModel = require('../models/userModel');
@@ -22,59 +20,43 @@ const conControls = {
         });
     },
     getConversations: (req, res, next) => {
-        convoModel
-            .getConversations({ id: req.session.Auth.id })
-            .then((response) => {
-                console.log(`getConversations`, response);
+        convoModel.getConversations({ id: req.session.Auth.id }).then((response) => {
+            console.log(`getConversations`, response);
 
-                if (response.length) {
-                    response.forEach((conversation) => {
-                        conversation.conversationdate = momentUtil.formatMonthDate(
-                            conversation.conversationdate
-                        );
-                    });
-                }
-                if (req.params.conversationId) {
-                    console.log(
-                        'SPECIFIC CONVERSATION FETCHED',
-                        req.params.conversationId
+            if (response.length) {
+                response.forEach((conversation) => {
+                    conversation.conversationdate = momentUtil.formatMonthDate(
+                        conversation.conversationdate
                     );
-                    messageModel
-                        .getMessages({ id: req.params.conversationId })
-                        .then((messages) => {
-                            if (messages.length) {
-                                messages.forEach((message) => {
-                                    message.conversationDate = momentUtil.formatMonthDate(
-                                        message.date
-                                    );
-                                    message.conversationTimeStamp = momentUtil.formatTimeStamp(
-                                        message.date
-                                    );
-                                });
-                            }
-                            console.log(
-                                `messages FOR ${req.params.conversationId}`,
-                                messages
+                });
+            }
+            if (req.params.conversationId) {
+                console.log('SPECIFIC CONVERSATION FETCHED', req.params.conversationId);
+                messageModel.getMessages({ id: req.params.conversationId }).then((messages) => {
+                    if (messages.length) {
+                        messages.forEach((message) => {
+                            message.conversationDate = momentUtil.formatMonthDate(message.date);
+                            message.conversationTimeStamp = momentUtil.formatTimeStamp(
+                                message.date
                             );
-                            return res.render('messagesView', {
-                                onMessages: 'true',
-                                conversations: response,
-                                messages: messages,
-                                userid: req.params.userId,
-                            });
                         });
-                } else {
-                    // console.log(
-                    //     `CONVERSATIONS FOR ${req.session.Auth.id}`,
-                    //     response
-                    // );
-                    res.render('messagesView', {
+                    }
+                    console.log(`messages FOR ${req.params.conversationId}`, messages);
+                    return res.render('messagesView', {
                         onMessages: 'true',
                         conversations: response,
+                        messages: messages,
                         userid: req.params.userId,
                     });
-                }
-            });
+                });
+            } else {
+                res.render('messagesView', {
+                    onMessages: 'true',
+                    conversations: response,
+                    userid: req.params.userId,
+                });
+            }
+        });
     },
     create: (req, res) => {
         const form = {
@@ -122,9 +104,7 @@ const conControls = {
         };
         messageModel.createMessage(message).then((response) => {
             const userIdToSendTo =
-                message.senderid === req.session.Auth.id
-                    ? message.receiverid
-                    : message.senderid;
+                message.senderid === req.session.Auth.id ? message.receiverid : message.senderid;
             console.log(
                 `WHAT ARE THE IDS? MINE: ${req.session.Auth.id} SENDING TO: ${userIdToSendTo}`
             );

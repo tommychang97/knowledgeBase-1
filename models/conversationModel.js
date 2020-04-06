@@ -1,6 +1,6 @@
-let pg = require("../util/postgres");
+const pg = require('../util/postgres');
 
-const getConversations = user => {
+const getConversations = (user) => {
     return new Promise((resolve, reject) => {
         pg.query(
             `SELECT * FROM conversations INNER JOIN users on users.userid = conversations.senderid WHERE senderid = ${user.id} OR receiverid = ${user.id};`
@@ -13,7 +13,7 @@ const getConversations = user => {
     });
 };
 
-const createConversation = users => {
+const createConversation = (users) => {
     return new Promise((resolve, reject) => {
         pg.query(
             `INSERT INTO conversations (senderid, receiverid, topic, conversationdate) VALUES 
@@ -24,19 +24,21 @@ const createConversation = users => {
             }
             pg.query(
                 `SELECT * FROM conversations WHERE senderid = ${users.senderid} ORDER BY senderid DESC LIMIT 1`
-            ).then((res, err) => {
-                if (err) {
-                    reject(err);
-                }
-                resolve(res.rows);
-            }).catch(function(error) {
-                console.log(error);
-            });
+            )
+                .then((res, err) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(res.rows);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         });
     });
 };
 
 module.exports = {
-    getConversations: getConversations,
-    createConversation: createConversation
+    getConversations,
+    createConversation,
 };

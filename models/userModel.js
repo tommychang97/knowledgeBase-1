@@ -45,7 +45,7 @@ const getUserPage = (userid) => {
 
 const signUp = (registerInfo) => {
     return new Promise((resolve, reject) => {
-        if (registerInfo.birthdate == '') {
+        if (registerInfo.birthdate === '') {
             var query = `INSERT INTO users (firstname,lastname,password,email,imageurl,description,dob,country) VALUES 
             ($$${registerInfo.firstname}$$,$$${registerInfo.lastname}$$,$$${registerInfo.password}$$,$$${registerInfo.email}$$,$$${registerInfo.imageUrl}$$,$$${registerInfo.about}$$,null,$$${registerInfo.country}$$)`;
         } else {
@@ -146,9 +146,7 @@ const incrementPosts = (user) => {
 
 const incrementMessages = (user) => {
     return new Promise((resolve, reject) => {
-        pg.query(
-            `UPDATE users SET messages = messages + 1 WHERE userid = ${user.id}`
-        )
+        pg.query(`UPDATE users SET messages = messages + 1 WHERE userid = ${user.id}`)
             .then((res, err) => {
                 if (err) {
                     reject(err);
@@ -162,13 +160,13 @@ const incrementMessages = (user) => {
 };
 
 module.exports = {
-    getUserPage: getUserPage,
-    getUser: getUser,
-    deleteUserSession: deleteUserSession,
-    createUserSession: createUserSession,
-    signUp: signUp,
-    editProfile: editProfile,
-    incrementLike: incrementLike,
-    incrementPosts: incrementPosts,
-    incrementMessages: incrementMessages,
+    getUserPage,
+    getUser,
+    deleteUserSession,
+    createUserSession,
+    signUp,
+    editProfile,
+    incrementLike,
+    incrementPosts,
+    incrementMessages,
 };

@@ -13,17 +13,24 @@
         </div>
 
         <div class="post_text">
+
             {{body}}
         </div>
 
         <div class="post_info">
             <p>{{date}}</p>
-            <a class="showreplies" id="showreplies" href="javascript:;">{{replycount}} replies</a>
+            <a class="showreplies" onclick="toggleRepliesContainerDisplay({{threadid}})"
+                data-threadid="{{threadid}}">{{replycount}}
+                replies</a>
         </div>
     </div>
 
-    <div class="post_replies"></div>
-    <div class="div_reply_box" data-threadid="{{threadid}}"></div>
+    <div id="replies_container_{{threadid}}" class="post_replies">
+        {{#each replies}}
+            {{>thread_post}}
+        {{/each}}
+        {{>thread_post_reply_form}}
+    </div>
 </div>
 
 <script type="text/javascript" src="/js/post.js"></script>

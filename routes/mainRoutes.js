@@ -1,10 +1,6 @@
-'use strict';
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const router = express.Router();
-
 const authController = require('../controllers/AuthController');
 const msgController = require('../controllers/MessageController');
 const threadController = require('../controllers/ThreadController');
@@ -12,9 +8,13 @@ const profileController = require('../controllers/ProfileController');
 const convoController = require('../controllers/ConversationController');
 const postController = require('../controllers/PostController');
 
+const router = express.Router();
+
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname, 'public')));
+
+router.use('/home', authController.authenticate);
 
 router.get('/', (req, res) => {
     res.render('login_signup_page', { onLoginSignup: true, onLogin: true });
@@ -33,6 +33,7 @@ router.post('/signup', authController.signup);
 
 router.post('/register', authController.register);
 
+
 /** Profile  */
 router.get('/home/profile/:userId', profileController.get);
 
@@ -45,14 +46,13 @@ router.post('/home/user/:userId/like', profileController.sendLike);
 router.post('/home/user/:userId/message', profileController.sendMessage);
 
 /** Thread */
-router.post('/createThread', threadController.createThread);
+router.post('/home/createThread', threadController.createThread);
 
 router.get('/home/search', threadController.search);
 
-router.get(
-    '/home/user/:userId/threads/:threadId?/:search?',
-    threadController.get
-);
+router.get('/home/user/:userId/threads/:threadId?/:search?', threadController.get);
+
+router.get('/home/view/:userId/threads/:threadId?', threadController.viewOne);
 
 // router.post(
 //     '/home/user/:userId/threads/:postId/comment',
@@ -60,14 +60,7 @@ router.get(
 // );
 
 /** Posts */
-router.post('/home/threads/:threadId/post', postController.add);
-
-router.get('/home/posts/:postId?/:search?', postController.get);
-
-router.post(
-    '/home/user/:userId/posts/:postId/comment',
-    postController.sendComment
-);
+router.post('/home/user/:userId/threads/:threadId/post', postController.add);
 
 /** Messages  */
 
@@ -79,10 +72,7 @@ router.post('/home/user/:userId/messages/send', msgController.sendMessage);
 
 router.get('/home/user/:userId/conversations/create', convoController.getForm);
 
-router.get(
-    '/home/user/:userId/conversations/:conversationId?',
-    convoController.getConversations
-);
+router.get('/home/user/:userId/conversations/:conversationId?', convoController.getConversations);
 
 router.post('/home/user/:userId/conversations/create', convoController.create);
 

@@ -1,34 +1,57 @@
-'use strict';
-
 const bcrypt = require('bcrypt');
 const passport = require('../util/passport');
 const userModel = require('../models/userModel');
 const threadModel = require('../models/threadModel');
-
+const postModel = require('../models/postModel');
 const momentUtil = require('../util/moment');
 
 const saltRounds = 10;
 
 const authControls = {
+    authenticate: (req, res, next) => {
+        console.log('--------------------------------AUTHENTICATING------------------------------');
+        passport.authenticate('local', (err, user, info) => {
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                return res.redirect('/login');
+            }
+            req.logIn(user, (err) => {
+                if (err) {
+                    return next(err);
+                }
+                return res.redirect('/users/' + user.username);
+            });
+        });
+        next();
+    },
     home: (req, res) => {
         console.log(`SessionID: ${req.session.Auth.sessionid}`);
         updateUserDetails(req.session.UserInfo.email).then((userInfo) => {
+            req.session.UserInfo = userInfo;
             userInfo.id = req.session.Auth.id;
-            console.log(userInfo);
             threadModel.getThreads(0).then((response) => {
-                console.log(response);
                 if (response.length) {
-                    response.forEach((discussion) => {
-                        discussion.date = momentUtil.formatDateMonthYear(
-                            discussion.date
-                        );
+                    const populatedDiscussions = response.map((discussion) => {
+                        discussion.date = momentUtil.formatDateMonthYear(discussion.date);
+                        return postModel
+                            .getPosts({ id: discussion.threadid, page: 0 })
+                            .then((posts) => {
+                                console.log(`POSTS FOR THREAD ${discussion.threadid}`, posts);
+                                discussion.replies = posts;
+                                return discussion;
+                            });
+                    });
+                    Promise.all(populatedDiscussions).then((discussions) => {
+                        console.log('get threads home', discussions);
+                        res.render('home_page', {
+                            onHome: true,
+                            user: userInfo,
+                            discussions,
+                        });
                     });
                 }
-                res.render('home_page', {
-                    onHome: true,
-                    user: userInfo,
-                    discussions: response,
-                });
             });
         });
     },
@@ -171,8 +194,8 @@ const updateUserDetails = (email) => {
                 name: `${firstname} ${lastname}`,
                 email,
                 image: imageurl,
-                description: description,
-                country: country,
+                description,
+                country,
                 birthdate: dob,
                 posts,
                 messages,
