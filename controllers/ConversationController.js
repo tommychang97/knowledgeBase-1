@@ -11,7 +11,7 @@ const conControls = {
         userModel.getUserPage(userIdToMessage).then((response) => {
             const userDetails = { ...response.userInfo };
             res.render('sendUserMessage', {
-                onMessages: true,
+                onProfile: true,
                 user: {
                     id: req.params.userId,
                     imageurl: userDetails.imageurl,

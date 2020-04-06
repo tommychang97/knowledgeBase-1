@@ -109,3 +109,7 @@ a {
 .showreplies {
     cursor: pointer;
 }
+
+#logout_form {
+    display: inline;
+}
