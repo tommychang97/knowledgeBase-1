@@ -1,15 +1,41 @@
 const pg = require('../util/postgres');
 
 const getConversations = (user) => {
+    var image = [];
     return new Promise((resolve, reject) => {
         pg.query(
-            `SELECT * FROM conversations INNER JOIN users on users.userid = conversations.senderid WHERE senderid = ${user.id} OR receiverid = ${user.id};`
+            `SELECT users.imageurl FROM users INNER JOIN conversations on users.userid = conversations.receiverid WHERE conversations.senderid = ${user.id} ORDER BY conversationid DESC`
         ).then((res, err) => {
             if (err) {
+                console.log(err);
                 reject(err);
             }
-            resolve(res.rows);
+            if (res.rows.length > 0) {
+                for (var i = 0; i < res.rows.length; i++) {
+                    image.push(res.rows[i]['imageurl']);
+                }
+            }
         });
+        pg.query(
+            `SELECT * FROM users INNER JOIN conversations on users.userid = conversations.senderid WHERE senderid = ${user.id} OR receiverid = ${user.id} ORDER BY conversationid DESC`
+        )
+            .then((res, err) => {
+                if (err) {
+                    reject(err);
+                }
+                for (var i = 0; i < res.rows.length; i++) {
+                    if (res.rows[i]['senderid'] == user.id) {
+                        res.rows[i]['imageurl'] = image.shift();
+                    }
+                }
+                console.log(res.rows);
+                resolve(res.rows);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }).catch(function (error) {
+        console.log(error);
     });
 };
 

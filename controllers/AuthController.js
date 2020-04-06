@@ -1,33 +1,24 @@
 const bcrypt = require('bcrypt');
-const passport = require('../util/passport');
+const passport = require('../config/passport');
+
 const userModel = require('../models/userModel');
 const threadModel = require('../models/threadModel');
 const postModel = require('../models/postModel');
+const sessionModel = require('../models/sessionModel');
 const momentUtil = require('../util/moment');
 
 const saltRounds = 10;
 
 const authControls = {
-    authenticate: (req, res, next) => {
-        console.log('--------------------------------AUTHENTICATING------------------------------');
-        passport.authenticate('local', (err, user, info) => {
-            if (err) {
-                return next(err);
-            }
-            if (!user) {
-                return res.redirect('/login');
-            }
-            req.logIn(user, (err) => {
-                if (err) {
-                    return next(err);
-                }
-                return res.redirect('/users/' + user.username);
-            });
-        });
-        next();
-    },
+    // authenticate: (req, res, next) => {
+    //     console.log('--------------------------------AUTHENTICATING------------------------------');
+    //     passport.sessionAuthenticate(req.sessionID);
+    //     passport.authenticate('local', {
+    //         successRedirect: '/home',
+    //         failureRedirect: '/',
+    //     })(req, res, next);
+    // },
     home: (req, res) => {
-        console.log(`SessionID: ${req.session.Auth.sessionid}`);
         updateUserDetails(req.session.UserInfo.email).then((userInfo) => {
             req.session.UserInfo = userInfo;
             userInfo.id = req.session.Auth.id;
@@ -58,6 +49,10 @@ const authControls = {
     login: (req, res) => {
         //todo implement passport
         const { email, password } = req.body;
+        passport.authenticate('local', {
+            failureRedirect: '/home',
+            successRedirect: '/',
+        });
         userModel
             .getUser(email)
             .then((response) => {

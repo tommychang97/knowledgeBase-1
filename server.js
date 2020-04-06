@@ -1,12 +1,11 @@
-'use strict';
-
-var bodyParser = require('body-parser');
-var express = require('express');
-var hbs = require('express-handlebars');
-var path = require('path');
-var session = require('express-session');
-var uuid = require('uuid');
-var app = express();
+const bodyParser = require('body-parser');
+const express = require('express');
+const hbs = require('express-handlebars');
+const path = require('path');
+const session = require('express-session');
+const uuid = require('uuid');
+const passport = require('./config/passport');
+const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -14,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const port = 8000;
 const mainRoutes = require('./routes/mainRoutes');
 
-let hbsHelpers = hbs.create({
+const hbsHelpers = hbs.create({
     helpers: require('./helpers/handlesbars').helpers,
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     defaultLayout: 'main-layout',
@@ -23,7 +22,7 @@ let hbsHelpers = hbs.create({
 
 app.use(
     session({
-        genid: req => {
+        genid: (req) => {
             return uuid.v4(); // use UUIDs for session IDs
         },
         secret: 'tommy changster',
@@ -32,6 +31,9 @@ app.use(
         cookie: { secure: false },
     })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine('.hbs', hbsHelpers.engine);
 
