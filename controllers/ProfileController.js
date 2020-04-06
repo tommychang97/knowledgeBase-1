@@ -45,11 +45,11 @@ const profileControls = {
             .editProfile(form)
             .then((result) => {
                 console.log('UPDATE USER INFORMATION', result);
-                res.redirect('/home');
+                res.redirect('/home/main');
             })
             .catch((err) => {
                 console.log('failed to update user', err);
-                res.redirect('/home');
+                res.redirect('/home/main');
             });
         // db.updateUser({name, imageUrl, country, birthdate});
     },

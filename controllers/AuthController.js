@@ -97,7 +97,7 @@ const authControls = {
                                 sessionid: req.sessionID,
                             };
                             userModel.createUserSession(req.session.Auth);
-                            res.redirect('home');
+                            res.redirect('home/main');
                         } else {
                             res.redirect('/');
                         }
@@ -167,7 +167,7 @@ const authControls = {
                                 likes,
                             };
                             userModel.createUserSession(req.session.Auth);
-                            res.redirect('/home');
+                            res.redirect('/home/main');
                         }
                     });
                 });

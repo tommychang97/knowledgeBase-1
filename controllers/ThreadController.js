@@ -13,7 +13,7 @@ const threadControls = {
         console.log(form);
         threadModel.addThread(form).then((result) => {
             console.log('Added thread', result);
-            res.redirect('/home');
+            res.redirect('/home/main');
         });
     },
     get: (req, res) => {
