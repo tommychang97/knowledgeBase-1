@@ -36,7 +36,7 @@ const authControls = {
                             });
                     });
                     Promise.all(populatedDiscussions).then((discussions) => {
-                        console.log('get threads home', discussions, page);
+                        // console.log('get threads home', discussions, page);
                         res.render('home_page', {
                             onHome: true,
                             user: userInfo,
@@ -55,7 +55,6 @@ const authControls = {
         });
     },
     login: (req, res) => {
-        //todo implement passport
         const { email, password } = req.body;
         passport.authenticate('local', {
             failureRedirect: '/home',
@@ -82,8 +81,8 @@ const authControls = {
                         name: `${firstname} ${lastname}`,
                         email,
                         image: imageurl,
-                        description: description,
-                        country: country,
+                        description,
+                        country,
                         birthdate: dob,
                         posts,
                         messages,
@@ -96,6 +95,7 @@ const authControls = {
                                 sessionid: req.sessionID,
                             };
                             userModel.createUserSession(req.session.Auth);
+                            console.log('USER DETAILS', req.session.UserInfo);
                             res.redirect('home/main');
                         } else {
                             res.redirect('/');
@@ -127,8 +127,8 @@ const authControls = {
             onSignup: true,
         });
     },
-    register: (req, res, next) => {
-        let form = { ...req.session.signup, ...req.body };
+    register: (req, res) => {
+        const form = { ...req.session.signup, ...req.body };
         // hash password
         bcrypt
             .hash(form.password, saltRounds)
@@ -158,8 +158,8 @@ const authControls = {
                                 name: `${firstname} ${lastname}`,
                                 email,
                                 image: imageurl,
-                                description: description,
-                                country: country,
+                                description,
+                                country,
                                 birthdate: dob,
                                 posts,
                                 messages,
