@@ -1,6 +1,6 @@
 CREATE TABLE users (
     "password" varchar(128) NOT NULL,
-    imageurl varchar(128),
+    imageurl varchar(500),
     country varchar(50),
     description varchar(250),
     dob date,
