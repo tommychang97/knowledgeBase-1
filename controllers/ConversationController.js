@@ -25,7 +25,7 @@ const conControls = {
             if (response.length) {
                 response.forEach((conversation) => {
                     conversation.receiverid =
-                    conversation.receiverid === req.session.Auth.id
+                        conversation.receiverid === req.session.Auth.id
                             ? conversation.senderid
                             : conversation.receiverid;
                     conversation.conversationdate = momentUtil.formatMonthDate(
@@ -34,6 +34,9 @@ const conControls = {
                 });
             }
             if (req.params.conversationId) {
+                response.receiverid === req.session.Auth.id
+                    ? response.senderid
+                    : response.receiverid;
                 // console.log('SPECIFIC CONVERSATION FETCHED', req.params.conversationId);
                 messageModel.getMessages({ id: req.params.conversationId }).then((messages) => {
                     if (messages.length) {
@@ -105,9 +108,15 @@ const conControls = {
             receiverid: req.params.userId,
             ...req.body,
         };
+        console.log(
+            `RECEIVERID: ${message.receiverid} | SENDERID: ${message.senderid} | MY ID: ${req.session.Auth.id}`
+        );
+        console.log(
+            `IS MY ID THE SAME AS THE RECEIVERID? ${message.receiverid === req.session.Auth.id}`
+        );
+        const userIdToSendTo =
+            message.receiverid === req.session.Auth.id ? message.senderid : message.receiverid;
         messageModel.createMessage(message).then((response) => {
-            const userIdToSendTo =
-                message.senderid === req.session.Auth.id ? message.receiverid : message.senderid;
             console.log(
                 `WHAT ARE THE IDS? MINE: ${req.session.Auth.id} SENDING TO: ${userIdToSendTo}`
             );
@@ -119,9 +128,7 @@ const conControls = {
                 const text = message.body;
                 mailer.sendMail(from, to, subject, text);
             });
-            res.redirect(
-                `/home/user/${req.session.Auth.id}/conversations/${req.params.conversationId}`
-            );
+            res.redirect(`/home/user/${userIdToSendTo}/conversations/${req.params.conversationId}`);
         });
     },
 };
