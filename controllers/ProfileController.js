@@ -28,6 +28,12 @@ const profileControls = {
                         console.log('THIS IS THE USERS PROFILE: ', userProfile);
                         res.render('profileView', userProfile);
                     });
+                } else {
+                    const userProfile = {
+                        onProfile: true,
+                        user: response.userInfo,
+                    };
+                    res.render('profileView', userProfile);
                 }
             })
             .catch((err) => {
