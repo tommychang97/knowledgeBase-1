@@ -4,20 +4,19 @@ const passport = require('../config/passport');
 const userModel = require('../models/userModel');
 const threadModel = require('../models/threadModel');
 const postModel = require('../models/postModel');
-const sessionModel = require('../models/sessionModel');
 const momentUtil = require('../util/moment');
 
 const saltRounds = 10;
 
 const authControls = {
-    // authenticate: (req, res, next) => {
-    //     console.log('--------------------------------AUTHENTICATING------------------------------');
-    //     passport.sessionAuthenticate(req.sessionID);
-    //     passport.authenticate('local', {
-    //         successRedirect: '/home',
-    //         failureRedirect: '/',
-    //     })(req, res, next);
-    // },
+    authenticate: (req, res, next) => {
+        console.log('--------------------------------AUTHENTICATING------------------------------');
+        if (req.session.Auth && req.session.Auth.sessionid !== 'undefined') {
+            next();
+        } else {
+            res.redirect('/');
+        }
+    },
     home: (req, res) => {
         updateUserDetails(req.session.UserInfo.email).then((userInfo) => {
             req.session.UserInfo = userInfo;

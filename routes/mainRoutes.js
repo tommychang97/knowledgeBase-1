@@ -14,7 +14,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 router.use(express.static(path.join(__dirname, 'public')));
 
-// router.use('/home', authController.authenticate);
+router.use('/home', authController.authenticate);
 
 router.get('/', (req, res) => {
     res.render('login_signup_page', { onLoginSignup: true, onLogin: true });
