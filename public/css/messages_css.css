@@ -79,6 +79,7 @@
 }
 
 .div_message_box_container {
+    overflow: scroll;
     height: 450px;
     max-height: inherit;
 }
@@ -156,7 +157,7 @@
     height: 150px;
 }
 
-.div_write_message{
+.div_write_message {
     height: 100px;
 }
 

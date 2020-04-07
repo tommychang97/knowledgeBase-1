@@ -1,33 +1,36 @@
 <div class="div_post">
-    <div class="user_img">
-        <a href="/home/profile/{{userid}}">
-            <img src={{imageurl}}>
-        </a>
-    </div>
+    <div class="div_post_content">
 
-    <div class="post_body">
-
-        <div class="post_head">
-            <h3>{{title}}</h3>
-            <button class="btn_format_white btn_topic">{{subject}}</button>
+        <div class="user_img">
+            <a href="/home/profile/{{userid}}">
+                <img src={{imageurl}}>
+            </a>
         </div>
 
-        <div class="post_text">
+        <div class="post_body">
 
-            {{body}}
-        </div>
+            <div class="post_head">
+                <h3>{{title}}</h3>
+                <button class="btn_format_white btn_topic">{{subject}}</button>
+            </div>
 
-        <div class="post_info">
-            <p>{{date}}</p>
-            <a class="showreplies" onclick="toggleRepliesContainerDisplay({{threadid}})"
-                data-threadid="{{threadid}}">{{replycount}}
-                replies</a>
+            <div class="post_text">
+
+                {{body}}
+            </div>
+
+            <div class="post_info">
+                <p>{{date}}</p>
+                <a class="showreplies" onclick="toggleRepliesContainerDisplay({{threadid}})"
+                    data-threadid="{{threadid}}">{{replycount}}
+                    replies</a>
+            </div>
         </div>
     </div>
 
     <div id="replies_container_{{threadid}}" class="post_replies">
         {{#each replies}}
-            {{>thread_post}}
+        {{>thread_post}}
         {{/each}}
         {{>thread_post_reply_form}}
     </div>
