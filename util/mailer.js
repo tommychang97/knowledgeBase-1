@@ -10,7 +10,10 @@ let transporter = mailer.createTransport({
     // tls: {
     //   rejectUnauthorized: false
     // },
+    host: 'smtp.gmail.com',
+    port: 1065,
     service: 'gmail',
+    secure: false,
     auth: {
         user: 'test.michaelmhyu@gmail.com',
         pass: 'Tester123!',

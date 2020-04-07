@@ -53,11 +53,6 @@ router.get('/home/user/:userId/threads/:threadId?/:search?', threadController.ge
 
 router.get('/home/view/:userId/threads/:threadId?', threadController.viewOne);
 
-// router.post(
-//     '/home/user/:userId/threads/:postId/comment',
-//     threadController.sendComment
-// );
-
 /** Posts */
 router.post('/home/user/:userId/threads/:threadId/post', postController.add);
 

@@ -21,17 +21,20 @@ const conControls = {
     },
     getConversations: (req, res, next) => {
         convoModel.getConversations({ id: req.session.Auth.id }).then((response) => {
-            console.log(`getConversations`, response);
-
+            // console.log(`getConversations`, response);
             if (response.length) {
                 response.forEach((conversation) => {
+                    conversation.receiverid =
+                    conversation.receiverid === req.session.Auth.id
+                            ? conversation.senderid
+                            : conversation.receiverid;
                     conversation.conversationdate = momentUtil.formatMonthDate(
                         conversation.conversationdate
                     );
                 });
             }
             if (req.params.conversationId) {
-                console.log('SPECIFIC CONVERSATION FETCHED', req.params.conversationId);
+                // console.log('SPECIFIC CONVERSATION FETCHED', req.params.conversationId);
                 messageModel.getMessages({ id: req.params.conversationId }).then((messages) => {
                     if (messages.length) {
                         messages.forEach((message) => {
@@ -41,7 +44,7 @@ const conControls = {
                             );
                         });
                     }
-                    console.log(`messages FOR ${req.params.conversationId}`, messages);
+                    // console.log(`messages FOR ${req.params.conversationId}`, messages);
                     return res.render('messagesView', {
                         onMessages: 'true',
                         conversations: response,
@@ -112,7 +115,7 @@ const conControls = {
                 console.log('USERINFO', user.userInfo.email);
                 const from = req.session.UserInfo.email;
                 const to = user.userInfo.email;
-                const subject = `[KNOWLEDGEBASE] Message Notification from ${req.session.UserInfo.firstname} ${req.session.UserInfo.lastname}`;
+                const subject = `[KNOWLEDGEBASE] Message Notification from ${req.session.UserInfo.name}`;
                 const text = message.body;
                 mailer.sendMail(from, to, subject, text);
             });
