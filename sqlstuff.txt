@@ -27,7 +27,7 @@ CREATE TABLE threads (
     userid integer NOT NULL,
     title varchar(50) NOT NULL,
     body varchar(1000) NOT NULL,
-    date date NOT NULL,
+    date TIMESTAMPTZ NOT NULL,
     subject varchar(50) NOT NULL,
     replyCount integer DEFAULT 0,
     CONSTRAINT thread_pk PRIMARY KEY (threadid),
@@ -40,7 +40,7 @@ CREATE TABLE posts (
     userid integer NOT NULL,
     title varchar(50) NOT NULL,
     body varchar(1000) NOT NULL,
-    date date NOT NULL,
+    date TIMESTAMPTZ NOT NULL,
     CONSTRAINT post_pk PRIMARY KEY (postid, threadid),
 	CONSTRAINT threadid_fk FOREIGN KEY (threadid) REFERENCES threads(threadid),
     CONSTRAINT userid_fk FOREIGN KEY (userid) REFERENCES users(userid)
@@ -51,8 +51,8 @@ CREATE TABLE conversations (
     senderid integer NOT NULL,
     receiverid integer NOT NULL,
     topic varchar(250),
-    conversationdate date,
-    CONSTRAINT convo_pk PRIMARY KEY (conversationid, senderid, receiverid)
+    conversationdate TIMESTAMPTZ,
+    CONSTRAINT convo_pk PRIMARY KEY (conversationid)
 );
 
 
@@ -62,8 +62,8 @@ CREATE TABLE messages (
     receiverid integer NOT NULL,
     conversationid integer NOT NULL,
     body varchar(1000) NOT NULL,
-	date date NOT NULL,
+	date TIMESTAMPTZ NOT NULL,
     CONSTRAINT message_pk PRIMARY KEY (messageid, conversationid),
-	CONSTRAINT convoid_fk FOREIGN KEY (conversationid,senderid,receiverid) REFERENCES conversations(conversationid,senderid,receiverid)
+    CONSTRAINT convo_fk FOREIGN KEY (conversationid) REFERENCES conversations(conversationid)
 );
     
