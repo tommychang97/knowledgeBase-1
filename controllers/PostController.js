@@ -12,7 +12,7 @@ const post = {
         console.log(' ADDING THIS MESSAGE', post);
         postModel.addPost(post).then((response) => {
             console.log('post added', response);
-            res.redirect(`home/view/${postUserId}/threads/${threadid}`);
+            res.redirect(`/home/view/${postUserId}/threads/${threadid}`);
         });
     },
 };
