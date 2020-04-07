@@ -1,4 +1,6 @@
 const userModel = require('../models/userModel');
+const threadModel = require('../models/threadModel');
+const postModel = require('../models/postModel');
 const momentUtil = require('../util/moment');
 
 const profileControls = {
@@ -8,17 +10,25 @@ const profileControls = {
             .getUserPage(userId)
             .then((response) => {
                 if (response.userThreads.length) {
-                    response.userThreads.forEach((discussion) => {
+                    const populatedDiscussions = response.userThreads.map((discussion) => {
                         discussion.date = momentUtil.formatDateMonthYear(discussion.date);
+                        return postModel
+                            .getPosts({ id: discussion.threadid, page: 0 })
+                            .then((posts) => {
+                                discussion.replies = posts;
+                                return discussion;
+                            });
+                    });
+                    Promise.all(populatedDiscussions).then((discussions) => {
+                        const userProfile = {
+                            onProfile: true,
+                            user: response.userInfo,
+                            posts: response.userThreads,
+                        };
+                        console.log('THIS IS THE USERS PROFILE: ', userProfile);
+                        res.render('profileView', userProfile);
                     });
                 }
-                const userProfile = {
-                    onProfile: true,
-                    user: response.userInfo,
-                    posts: response.userThreads,
-                };
-                console.log(userProfile);
-                res.render('profileView', userProfile);
             })
             .catch((err) => {
                 console.log(err);
