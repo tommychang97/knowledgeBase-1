@@ -1,0 +1,22 @@
+<div id="searchView">
+    <!-- todo: use results to show posts here -->
+    {{#each posts}}
+    {{>post}}
+    {{/each}}
+</div>
+
+{{!-- 
+response format
+[
+  {
+    threadid: 5,
+    userid: 19,
+    title: 'post 2',
+    body: 'wefwefwef',
+    date: 2020-04-03T07:00:00.000Z,
+    subject: 'php',
+    replycount: 0
+  }
+]
+
+ --}}

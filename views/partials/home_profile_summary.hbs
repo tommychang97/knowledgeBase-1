@@ -1,25 +1,26 @@
 <div id="div_profile_sum">
     <div id="img_profile">
-        <img src={{user.image}} alt="user" />
+        <a href="/home/profile/{{user.id}}" type="text/html">
+            <img src={{user.image}} alt="user" />
+        </a>
     </div>
-
     <h2>{{user.name}}</h2>
-    <p>{{user.desctiption}}</p>
+    <p>{{user.description}}</p>
 </div>
 
 <div id="div_links">
     <p>
-        <a class="profile_links" href="">Post</a>
-        <span class="profile_link_size">{{post.size}}</span>
+        <a class="profile_links" href="/home/user/{{user.id}}/threads">Post</a>
+        <span class="profile_link_size">{{user.posts}}</span>
     </p>
     <p>
-        <a class="profile_links" href="">Messages</a>
-        <span class="profile_link_size">{{message.size}}</span>
+        <a class="profile_links" href="/home/user/{{user.id}}/conversations">Messages</a>
+        <span class="profile_link_size">{{user.messages}}</span>
     </p>
     <p>
-        <a class="profile_links" href="">Likes</a>
-        <span class="profile_link_size">{{likes.size}}</span>
+        <p class="profile_links" href="">Likes</p>
+        <span class="profile_link_size">{{user.likes}}</span>
     </p>
     <br />
-    <p><a class="profile_links" href="">Edit Profile</a></p>
+    <p><a class="profile_links" href="/home/user/{{user.id}}/edit">Edit Profile</a></p>
 </div>

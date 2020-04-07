@@ -1,23 +1,20 @@
-'use strict';
+const postModel = require('../models/postModel');
 
-const postControls = {
-    get: (req, res) => {
-        const msgId = req.params.msgId; //ids start at 1
-        const userId = req.params.userId;
-        if (msgId) {
-            // db.getMessage(msgId)
-        }
-        //db.getMessages
+const post = {
+    add: (req, res) => {
+        const threadid = req.params.threadId;
+        const postUserId = req.params.userId;
+        const post = {
+            threadid,
+            id: req.session.Auth.id,
+            ...req.body,
+        };
+        console.log(' ADDING THIS MESSAGE', post);
+        postModel.addPost(post).then((response) => {
+            console.log('post added', response);
+            res.redirect(`/home/view/${postUserId}/threads/${threadid}`);
+        });
     },
-    search: (req, res) => {
-        const searchValue = req.params.searchValue;
-        const topic = req.params.topic;
-        // query db for posts with name containing value or topic == topic
-        // const results = db.findPosts(searchValue, topic);
-        const results = {};
-        res.render('searchView', results);
-    },
-    sendComment: (req, res) => {},
 };
 
-module.exports = postControls;
+module.exports = post;

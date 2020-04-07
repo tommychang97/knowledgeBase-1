@@ -1,0 +1,63 @@
+CREATE OR REPLACE FUNCTION update_posts_count()
+RETURNS trigger AS
+$BODY$
+BEGIN
+UPDATE users a
+SET posts = posts + 1
+WHERE a.userid = new.userid;
+    RETURN new; 
+END;
+$BODY$
+ LANGUAGE plpgsql VOLATILE;
+
+
+CREATE TRIGGER post_trigger
+AFTER INSERT
+ON threads
+FOR EACH ROW
+EXECUTE PROCEDURE update_posts_count();
+
+
+
+
+CREATE OR REPLACE FUNCTION update_replies_count()
+RETURNS trigger AS
+$BODY$
+BEGIN
+UPDATE threads a
+SET replyCount = replyCount + 1
+WHERE a.threadid = new.threadid;
+    RETURN new; 
+END;
+$BODY$
+ LANGUAGE plpgsql VOLATILE;
+
+CREATE TRIGGER replies_trigger
+AFTER INSERT
+ON posts
+FOR EACH ROW
+EXECUTE PROCEDURE update_replies_count();
+
+CREATE OR REPLACE FUNCTION update_messages_count()
+RETURNS trigger AS
+$BODY$
+BEGIN
+UPDATE users a
+SET messages = messages + 1
+WHERE a.userid = new.userid;
+    RETURN new; 
+END;
+$BODY$
+ LANGUAGE plpgsql VOLATILE;
+
+CREATE TRIGGER post_trigger
+AFTER INSERT
+ON messages
+FOR EACH ROW
+EXECUTE PROCEDURE update_messages_count();
+
+
+
+
+
+
